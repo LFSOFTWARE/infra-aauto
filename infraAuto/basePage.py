@@ -37,6 +37,12 @@ class BasePage:
                 else:
                     element.click()
 
+    def inputFormMultiple(self, data):
+        for obj in data:
+            self.findAndWrite(obj['value'], obj['id'])
+
+
+
     def findAndClear(self, id):
         pass;
 
