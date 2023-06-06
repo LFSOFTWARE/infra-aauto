@@ -60,6 +60,7 @@ class Entidade:
                                           "NavigationView_tree-ItemEntidade"], True)
         
         self.base_page.findAndClick("tb-Controle-Cadastrar")
+        time.sleep(5)
         self.base_page.findAndClick("x-auto-815")
-        self.base_page.findAndClick("slickgrid_495730FANTASIA")
+        self.base_page.findAndDoubleClick("rowNum-0")
 
