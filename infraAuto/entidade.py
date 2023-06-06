@@ -1,4 +1,5 @@
 from basePage import BasePage
+import time
 
 
 class Entidade:
@@ -58,7 +59,7 @@ class Entidade:
                                           "NavigationView_tree-FolderCadastroEntidade",
                                           "NavigationView_tree-ItemEntidade"], True)
         
-        self.base_page.findAndClick("Controle")
-        
-        self.base_page.findAndClickFisrtChild("rowNum-0")
+        self.base_page.findAndClick("tb-Controle-Cadastrar")
+        self.base_page.findAndClick("x-auto-815")
+        self.base_page.findAndClick("slickgrid_495730FANTASIA")
 

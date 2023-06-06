@@ -1,26 +1,32 @@
 from basePage import BasePage
+from sheet import Sheet
 from login import Login
 from entidade import Entidade
+from selenium import webdriver
 
 import time
 
-from selenium import webdriver
+sheet_class = Sheet("C:/Users/luiz_/workspace/pessoal/infra-auto/infraAuto/silt-template.xlsx")
+sheet_data = sheet_class.Import('Entidade')
 
 url_base = "https://synapcomhml2.seniorcloud.com.br/siltwms/"
-
 driver = webdriver.Chrome()
 driver.get(url_base)
 
-base_page = BasePage(driver);
+# Iterar sobre as linhas do DataFrame
+for row in sheet_data.itertuples(index=False):
+  col1_value = row.fantasia
+  col2_value = row.razao_social
 
-login_page = Login(base_page);
-login_page.Login("LUIZ.SSANTOS","Dankicode2002")
-time.sleep(2)
+  base_page = BasePage(driver);
 
-entidade_page = Entidade(base_page)
-# entidade_page.create()
+  login_page = Login(base_page);
+  login_page.Login("LUIZ.SSANTOS","Dankicode2002")
+  time.sleep(2)
 
-entidade_page.Address()
+  entidade_page = Entidade(base_page)
+
+  entidade_page.Address()
 
 
-time.sleep(30)
+  time.sleep(30)

@@ -3,9 +3,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.keys import Keys
-import time
-
 
 class BasePage:
 
@@ -26,13 +23,11 @@ class BasePage:
         )
         element.click()
 
-    def findAndClickFisrtChild(self, id):
+    def teste(self, id):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
         )
-        primeiro_filho = element.find_element(By.CSS_SELECTOR, 'div:first-child')
-        primeiro_filho.click()
-
+        element.click()
 
     def findAndDoubleClick(self, id):
         element = WebDriverWait(self.driver, self.time).until(
