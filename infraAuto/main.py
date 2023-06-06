@@ -5,9 +5,6 @@ from entidade import Entidade
 import time
 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 url_base = "https://synapcomhml2.seniorcloud.com.br/siltwms/"
 
@@ -18,8 +15,12 @@ base_page = BasePage(driver);
 
 login_page = Login(base_page);
 login_page.Login("LUIZ.SSANTOS","Dankicode2002")
-
+time.sleep(2)
 
 entidade_page = Entidade(base_page)
-entidade_page.create()
-time.sleep(5)
+# entidade_page.create()
+
+entidade_page.Address()
+
+
+time.sleep(30)
