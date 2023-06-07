@@ -3,8 +3,9 @@ from interfaces import Empresa
 
 import time
 
+
 class Entidade:
-    def __init__(self, base_page: BasePage, data:Empresa):
+    def __init__(self, base_page: BasePage, data: Empresa):
         self.base_page = base_page
         self.data = data
 
@@ -22,25 +23,25 @@ class Entidade:
         # Define o Tipo
         self.base_page.findAndClick(
             "EntidadeDadosScreenDescriptor_tipoEntidade-input")
-        self.base_page.findByXpathAndClick("'DEPOSITANTE'", True)
+        self.base_page.findByXpathAndClick(f"'{self.data.tipo}'", True)
 
         # Inputs
         self.base_page.inputFormMultiple(
             [
                 {"id": "EntidadeDadosScreenDescriptor_razaoSocial",
-                    "value": "Razao socialx"},
+                    "value": self.data.razao_social},
                 {"id": "EntidadeDadosScreenDescriptor_nomeFantasia",
-                    "value": "Razao Fantasiax"},
+                    "value":  self.data.fantasia},
                 {"id": "EntidadeDadosScreenDescriptor_inscricaoEstatual",
-                    "value": "estadual"}
+                    "value": self.data.inscricao_estadual}
             ]
         )
 
-        self.base_page.WriteCNPJ("44.584.470/0001-15",
+        self.base_page.WriteCNPJ(self.data.cnpj,
                                  "EntidadeDadosScreenDescriptor_cgc")
         self.EletronicInvoices()
         self.Parameters()
-        self.Address()
+        # self.Address()
 
     def EletronicInvoices(self):
         self.base_page.findAndClick(
@@ -52,8 +53,10 @@ class Entidade:
 
     def Parameters(self):
         self.base_page.findAndClick("CadastroWindow_menuTreePanel-Parametros")
-        self.base_page.findAndClick(
-            "EntidadeParametrosScreenDescriptor_Emite Nota Fiscal")
+        
+        if self.data.emite_nf == 'sim':
+            self.base_page.findAndClick(
+                "EntidadeParametrosScreenDescriptor_Emite Nota Fiscal")
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeEntidadeButton")
 
@@ -72,7 +75,7 @@ class Entidade:
 
         # Encontra a empresa que esta sendo cadastrada
         for elemento in elementos_l7:
-            if elemento.text == "44.584.470/0001-15":
+            if elemento.text == self.data.cnpj:
                 elemento.click()
                 break
         self.base_page.ReturnToMainContext()
@@ -81,17 +84,28 @@ class Entidade:
 
         self.base_page.findAndClick("tb-VincularaEntidade-Endereco")
         self.base_page.findAndClick("tb-Cadastrar")
-        self.base_page.findAndWrite("06807000","EnderecoScreenDescriptor_cep")
+        self.base_page.findAndWrite(
+            self.data.cep, "EnderecoScreenDescriptor_cep")
 
         time.sleep(2)
 
         self.base_page.inputFormMultiple([
-             {"id": "EnderecoScreenDescriptor_complemento", "value": "perto da casa"},
-            {"id": "EnderecoScreenDescriptor_numero", "value": "123"},
-           ])
+            {"id": "EnderecoScreenDescriptor_complemento",
+                "value": self.data.complemento},
+            {"id": "EnderecoScreenDescriptor_numero", "value": self.data.numero},
+        ])
 
-        self.base_page.findAndClick("EnderecoScreenDescriptor_Entrega")
-        self.base_page.findAndClick("EnderecoScreenDescriptor_Cobranca")
-        self.base_page.findAndClick("EnderecoScreenDescriptor_Endereco Fiscal")
-        self.base_page.findAndClick("EnderecoScreenDescriptor_Impressão")
-        self.base_page.findAndClick("CadastroWindow_salvarCadastrodeEndereçoButton")
+        if self.data.entrega == 'sim':
+            self.base_page.findAndClick("EnderecoScreenDescriptor_Entrega")
+
+        if self.data.cobranca == 'sim':
+            self.base_page.findAndClick("EnderecoScreenDescriptor_Cobranca")
+
+        if self.data.endereco_fiscal == 'sim':
+            self.base_page.findAndClick("EnderecoScreenDescriptor_Endereco Fiscal")
+
+        if self.data.impressao == 'sim':
+            self.base_page.findAndClick("EnderecoScreenDescriptor_Impressão")
+        
+        self.base_page.findAndClick(
+            "CadastroWindow_salvarCadastrodeEndereçoButton")

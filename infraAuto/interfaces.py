@@ -2,6 +2,7 @@ class Empresa:
     def __init__(self, razao_social, fantasia, cnpj, tipo_inscricao, inscricao_estadual,
                  tipo, tipo_danfe, emite_nf, cep, numero, complemento,
                  entrega, cobranca, endereco_fiscal, impressao):
+        
         self.razao_social = razao_social
         self.fantasia = fantasia
         self.cnpj = cnpj
