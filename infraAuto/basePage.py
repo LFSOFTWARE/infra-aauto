@@ -1,8 +1,10 @@
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
 
 
 class BasePage:
@@ -35,6 +37,7 @@ class BasePage:
             EC.presence_of_element_located((By.ID, id))
         )
         element.send_keys(value)
+        element.send_keys(Keys.TAB)
 
     def findAndClick(self, id):
         element = WebDriverWait(self.driver, self.time).until(
@@ -85,7 +88,6 @@ class BasePage:
         select_element = self.driver.find_element(By.NAME, name)
         select = Select(select_element)
         select.select_by_visible_text(value)
-
     def WriteCNPJ(self, value, id):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))

@@ -62,19 +62,35 @@ class Entidade:
                                           "NavigationView_tree-ItemEntidade"], True)
 
         time.sleep(5)
-        
-        #Muda para o Iframe
+
+        # Muda para o Iframe
         self.base_page.switchToCotext("slickGridFrame")
 
-        elementos_l7 = self.base_page.findByClass("l7",True)
+        elementos_l7 = self.base_page.findByClass("l7", True)
 
-        #Encontra a empresa que esta sendo cadastrada
+        # Encontra a empresa que esta sendo cadastrada
         for elemento in elementos_l7:
             if elemento.text == "44.584.470/0001-15":
                 elemento.click()
-                break  
+                break
         self.base_page.ReturnToMainContext()
+
+        time.sleep(2)
 
         self.base_page.findAndClick("tb-VincularaEntidade-Endereco")
         self.base_page.findAndClick("tb-Cadastrar")
+        self.base_page.findAndWrite("06807000","EnderecoScreenDescriptor_cep")
+        time.sleep(5)
 
+        self.base_page.inputFormMultiple([
+             {"id": "EnderecoScreenDescriptor_complemento", "value": "perto da casa"},
+            {"id": "EnderecoScreenDescriptor_numero", "value": "123"},
+           ])
+        
+
+
+        self.base_page.findAndClick("EnderecoScreenDescriptor_Entrega")
+        self.base_page.findAndClick("EnderecoScreenDescriptor_Cobranca")
+        self.base_page.findAndClick("EnderecoScreenDescriptor_Endereco Fiscal")
+        self.base_page.findAndClick("EnderecoScreenDescriptor_Impressão")
+        self.base_page.findAndClick("CadastroWindow_salvarCadastrodeEndereçoButton")
