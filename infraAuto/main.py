@@ -3,7 +3,7 @@ from sheet import Sheet
 from login import Login
 from entidade import Entidade
 from depositante import Depositante
-
+from api import Api
 from selenium import webdriver
 import time
 
@@ -28,8 +28,13 @@ for row in sheet_data.itertuples(index=False):
 
   entidade_page = Entidade(base_page, row)
   # entidade_page.create()
-  
+
   depositante_page = Depositante(base_page, row)
-  depositante_page.create()
+  # depositante_page.create()
+
+  api_rest = Api(base_page, row)
+  
+  api_rest.create()
+
 
   time.sleep(30)
