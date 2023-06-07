@@ -3,9 +3,7 @@ from sheet import Sheet
 from login import Login
 from entidade import Entidade
 from selenium import webdriver
-
 import time
-
 sheet_class = Sheet("C:/Users/luiz_/workspace/pessoal/infra-auto/infraAuto/silt-template.xlsx")
 sheet_data = sheet_class.Import('Entidade')
 
@@ -17,7 +15,7 @@ driver.get(url_base)
 for row in sheet_data.itertuples(index=False):
   col1_value = row.fantasia
   col2_value = row.razao_social
-
+  print(row)
   base_page = BasePage(driver);
 
   login_page = Login(base_page);

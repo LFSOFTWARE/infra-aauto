@@ -1,9 +1,10 @@
 from basePage import BasePage
+from interfaces import Empresa
+
 import time
 
-
 class Entidade:
-    def __init__(self, base_page: BasePage, data):
+    def __init__(self, base_page: BasePage, data:Empresa):
         self.base_page = base_page
         self.data = data
 
@@ -18,7 +19,6 @@ class Entidade:
         self.base_page.findAndClickArray(["EntidadeDadosScreenDescriptor_tipoInscricaoEstadual",
                                           "EntidadeDadosScreenDescriptor_tipoInscricaoEstadual-0-CONTRIBUINTEICMS",
                                           ])
-
         # Define o Tipo
         self.base_page.findAndClick(
             "EntidadeDadosScreenDescriptor_tipoEntidade-input")
