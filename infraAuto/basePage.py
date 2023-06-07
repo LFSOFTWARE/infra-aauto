@@ -32,13 +32,17 @@ class BasePage:
         )
         return element
 
-    def findAndWrite(self, value, id):
+    def findAndWrite(self, value, id, pressEnter=False, pressTab=False):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
         )
         element.send_keys(value)
-        element.send_keys(Keys.TAB)
 
+        if pressEnter:
+            element.send_keys(Keys.ENTER)
+        if pressTab:
+            element.send_keys(Keys.TAB)
+        
     def findAndClick(self, id):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
@@ -88,9 +92,16 @@ class BasePage:
         select_element = self.driver.find_element(By.NAME, name)
         select = Select(select_element)
         select.select_by_visible_text(value)
+
     def WriteCNPJ(self, value, id):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
         )
         self.driver.execute_script(
             "arguments[0].value = arguments[1];", element, value)
+        
+    def pressEnter(self,id):
+        element = WebDriverWait(self.driver, self.time).until(
+                EC.presence_of_element_located((By.ID, id))
+            )
+        element.send_keys(Keys.ENTER)

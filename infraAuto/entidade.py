@@ -41,15 +41,17 @@ class Entidade:
                                  "EntidadeDadosScreenDescriptor_cgc")
         self.EletronicInvoices()
         self.Parameters()
-        # self.Address()
+        self.Address()
 
     def EletronicInvoices(self):
         self.base_page.findAndClick(
             "CadastroWindow_menuTreePanel-NotaFiscalEletronica")
         self.base_page.findAndClick(
             "EntidadeNfeScreenDescriptor_tipoImpressaoDanfe")
-        self.base_page.findAndDoubleClick(
-            "EntidadeNfeScreenDescriptor_tipoImpressaoDanfe-1-PDF")
+        
+        if self.data.tipo_danfe == 'PDF':
+            self.base_page.findAndDoubleClick(
+                "EntidadeNfeScreenDescriptor_tipoImpressaoDanfe-1-PDF")
 
     def Parameters(self):
         self.base_page.findAndClick("CadastroWindow_menuTreePanel-Parametros")
@@ -57,8 +59,11 @@ class Entidade:
         if self.data.emite_nf == 'sim':
             self.base_page.findAndClick(
                 "EntidadeParametrosScreenDescriptor_Emite Nota Fiscal")
+            
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeEntidadeButton")
+        time.sleep(15)
+        #REMOVER ISSO
 
     def Address(self):
         # Acessa Entidade
@@ -85,7 +90,7 @@ class Entidade:
         self.base_page.findAndClick("tb-VincularaEntidade-Endereco")
         self.base_page.findAndClick("tb-Cadastrar")
         self.base_page.findAndWrite(
-            self.data.cep, "EnderecoScreenDescriptor_cep")
+           f"0{self.data.cep}", "EnderecoScreenDescriptor_cep", pressTab=True)
 
         time.sleep(2)
 
