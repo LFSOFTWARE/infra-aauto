@@ -4,12 +4,31 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 
+
 class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
         self.actions = ActionChains(driver)
         self.time = 50
+
+    def findById(self, id, all=False):
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.ID, id))
+        )
+        return element
+
+    def findByClass(self, className, all=False):
+        if all:
+            elements = WebDriverWait(self.driver, self.time).until(
+                EC.presence_of_all_elements_located((By.CLASS_NAME, className))
+            )
+            return elements
+
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.CLASS_NAME, className))
+        )
+        return element
 
     def findAndWrite(self, value, id):
         element = WebDriverWait(self.driver, self.time).until(
@@ -23,11 +42,14 @@ class BasePage:
         )
         element.click()
 
-    def teste(self, id):
+    def switchToCotext(self, id):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
         )
-        element.click()
+        self.driver.switch_to.frame(element)
+
+    def ReturnToMainContext(self):
+        self.driver.switch_to.default_content()
 
     def findAndDoubleClick(self, id):
         element = WebDriverWait(self.driver, self.time).until(
@@ -68,6 +90,5 @@ class BasePage:
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
         )
-        self.driver.execute_script("arguments[0].value = arguments[1];", element, value)
-
-    
+        self.driver.execute_script(
+            "arguments[0].value = arguments[1];", element, value)

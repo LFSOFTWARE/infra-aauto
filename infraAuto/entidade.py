@@ -5,7 +5,7 @@ import time
 class Entidade:
     def __init__(self, base_page: BasePage):
         self.base_page = base_page
-        
+
     def create(self):
         # Acessa Entidade
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
@@ -34,8 +34,9 @@ class Entidade:
                     "value": "estadual"}
             ]
         )
-        
-        self.base_page.WriteCNPJ("44.584.470/0001-15", "EntidadeDadosScreenDescriptor_cgc")
+
+        self.base_page.WriteCNPJ("44.584.470/0001-15",
+                                 "EntidadeDadosScreenDescriptor_cgc")
         self.EletronicInvoices()
         self.Parameters()
 
@@ -51,16 +52,29 @@ class Entidade:
         self.base_page.findAndClick("CadastroWindow_menuTreePanel-Parametros")
         self.base_page.findAndClick(
             "EntidadeParametrosScreenDescriptor_Emite Nota Fiscal")
-        self.base_page.findAndClick("CadastroWindow_salvarCadastrodeEntidadeButton")
+        self.base_page.findAndClick(
+            "CadastroWindow_salvarCadastrodeEntidadeButton")
 
     def Address(self):
-         # Acessa Entidade
+        # Acessa Entidade
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                           "NavigationView_tree-FolderCadastroEntidade",
                                           "NavigationView_tree-ItemEntidade"], True)
-        
-        self.base_page.findAndClick("tb-Controle-Cadastrar")
+
         time.sleep(5)
-        self.base_page.findAndClick("x-auto-815")
-        self.base_page.findAndDoubleClick("rowNum-0")
+        
+        #Muda para o Iframe
+        self.base_page.switchToCotext("slickGridFrame")
+
+        elementos_l7 = self.base_page.findByClass("l7",True)
+
+        #Encontra a empresa que esta sendo cadastrada
+        for elemento in elementos_l7:
+            if elemento.text == "44.584.470/0001-15":
+                elemento.click()
+                break  
+        self.base_page.ReturnToMainContext()
+
+        self.base_page.findAndClick("tb-VincularaEntidade-Endereco")
+        self.base_page.findAndClick("tb-Cadastrar")
 
