@@ -28,6 +28,7 @@ for row in sheet_data.itertuples(index=False):
 
   entidade_page = Entidade(base_page, row)
   # entidade_page.create()
+  
   depositante_page = Depositante(base_page, row)
   depositante_page.create()
 
