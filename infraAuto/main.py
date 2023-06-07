@@ -22,11 +22,11 @@ for row in sheet_data.itertuples(index=False):
 
   login_page = Login(base_page);
   login_page.Login("LUIZ.SSANTOS","Dankicode2002")
+
   time.sleep(2)
 
-  entidade_page = Entidade(base_page)
-
-  entidade_page.Address()
+  entidade_page = Entidade(base_page, row)
+  entidade_page.create()
 
 
   time.sleep(30)

@@ -3,8 +3,9 @@ import time
 
 
 class Entidade:
-    def __init__(self, base_page: BasePage):
+    def __init__(self, base_page: BasePage, data):
         self.base_page = base_page
+        self.data = data
 
     def create(self):
         # Acessa Entidade
@@ -39,6 +40,7 @@ class Entidade:
                                  "EntidadeDadosScreenDescriptor_cgc")
         self.EletronicInvoices()
         self.Parameters()
+        self.Address()
 
     def EletronicInvoices(self):
         self.base_page.findAndClick(
@@ -80,14 +82,13 @@ class Entidade:
         self.base_page.findAndClick("tb-VincularaEntidade-Endereco")
         self.base_page.findAndClick("tb-Cadastrar")
         self.base_page.findAndWrite("06807000","EnderecoScreenDescriptor_cep")
-        time.sleep(5)
+
+        time.sleep(2)
 
         self.base_page.inputFormMultiple([
              {"id": "EnderecoScreenDescriptor_complemento", "value": "perto da casa"},
             {"id": "EnderecoScreenDescriptor_numero", "value": "123"},
            ])
-        
-
 
         self.base_page.findAndClick("EnderecoScreenDescriptor_Entrega")
         self.base_page.findAndClick("EnderecoScreenDescriptor_Cobranca")
