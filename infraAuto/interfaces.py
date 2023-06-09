@@ -1,7 +1,7 @@
 class Empresa:
     def __init__(self, razao_social, fantasia, cnpj, tipo_inscricao, inscricao_estadual,
                  tipo, tipo_danfe, emite_nf, cep, numero, complemento,
-                 entrega, cobranca, endereco_fiscal, impressao):
+                 entrega, cobranca, endereco_fiscal, impressao, armazem, integracao_via_servico_rest):
         
         self.razao_social = razao_social
         self.fantasia = fantasia
@@ -18,4 +18,6 @@ class Empresa:
         self.cobranca = cobranca
         self.endereco_fiscal = endereco_fiscal
         self.impressao = impressao
+        self.armazem = armazem
+        self.integracao_via_servico_rest = integracao_via_servico_rest
 

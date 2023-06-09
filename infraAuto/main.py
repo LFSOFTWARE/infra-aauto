@@ -8,7 +8,7 @@ from selenium import webdriver
 import time
 
 sheet_class = Sheet("C:/Users/luiz_/workspace/pessoal/infra-auto/infraAuto/silt-template.xlsx")
-sheet_data = sheet_class.Import('Entidade')
+sheet_data = sheet_class.Import('entidade')
 
 url_base = "https://synapcomhml2.seniorcloud.com.br/siltwms/"
 driver = webdriver.Chrome()
