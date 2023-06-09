@@ -1,8 +1,10 @@
 class Empresa:
     def __init__(self, razao_social, fantasia, cnpj, tipo_inscricao, inscricao_estadual,
                  tipo, tipo_danfe, emite_nf, cep, numero, complemento,
-                 entrega, cobranca, endereco_fiscal, impressao, armazem, integracao_via_servico_rest):
-        
+                 entrega, cobranca, endereco_fiscal, impressao, armazem, 
+                 integracao_via_servico_rest, setor_armazenagem, codigo_integracao, area_setor, 
+                 tipo_setor, permite_expedicao_produto, permite_mais_produto_pulmao):
+
         self.razao_social = razao_social
         self.fantasia = fantasia
         self.cnpj = cnpj
@@ -20,4 +22,21 @@ class Empresa:
         self.impressao = impressao
         self.armazem = armazem
         self.integracao_via_servico_rest = integracao_via_servico_rest
+        
+        # SETOR
+        self.setor_armazenagem = setor_armazenagem
+        self.codigo_integracao = codigo_integracao
+        self.area_setor = area_setor
+        self.tipo_setor = tipo_setor
+        self.permite_expedicao_produto = permite_expedicao_produto
+        self.permite_mais_produto_pulmao = permite_mais_produto_pulmao
 
+
+class Setor:
+    def __init__(self, setor_armazenagem, codigo_integracao, area_setor, tipo_setor, permite_expedicao_produto, permite_mais_produto_pulmao):
+        self.setor_armazenagem = setor_armazenagem
+        self.codigo_integracao = codigo_integracao
+        self.area_setor = area_setor
+        self.tipo_setor = tipo_setor
+        self.permite_expedicao_produto = permite_expedicao_produto
+        self.permite_mais_produto_pulmao
