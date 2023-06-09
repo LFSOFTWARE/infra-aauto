@@ -30,8 +30,6 @@ def create_entidade(base_page, sheet):
     for row in sheet.itertuples(index=False):
         col1_value = row.fantasia
         col2_value = row.razao_social
-        print(row)
-
         entidade_page = Entidade(base_page, row)
         # entidade_page.create()
 
@@ -41,12 +39,18 @@ def create_entidade(base_page, sheet):
         api_rest = Api(base_page, row)
         # api_rest.create()
 
+
+def create_setor(base_page, sheet):
+    # Iterar sobre as linhas do DataFrame
+    for row in sheet.itertuples(index=False):
+        print(row)
         setor = Setor(base_page, row)
-
-        setor.create()
-
-        time.sleep(30)
-
+        setor.createDepositante()
 
 create_entidade(base_page, sheet_entidade)
+time.sleep(5)
 
+sheet_setor = sheet_class.Import('setor')
+create_setor(base_page, sheet_setor)
+
+time.sleep(30)
