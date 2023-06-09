@@ -75,11 +75,19 @@ class Setor:
         self.base_page.findAndWrite(
             self.data.setor_armazenagem, "filter-SETOR")
         self.base_page.pressEnter("filter-SETOR")
-
-        elements = self.base_page.findByClass("r1")
-
-        for elemento in elements:
-            if elemento.text == self.data.setor_armazenagem:
-                elemento.click()
-                break
+        time.sleep(5)
+        self.base_page.findAndClick("rowNum-0")
+        
         self.base_page.ReturnToMainContext()
+
+        self.base_page.findAndClick("tb-VincularaoSetor-Depositantes")
+        self.base_page.findAndClick("SiltTransfere_buscarComboBox")
+      #   elements = self.base_page.findByClass("r1", all=True)
+      #   time.sleep(5)
+
+      #   for elemento in elements:
+      #       if elemento.text == self.data.setor_armazenagem:
+      #           elemento.click()
+      #           break
+
+      #   self.base_page.ReturnToMainContext()

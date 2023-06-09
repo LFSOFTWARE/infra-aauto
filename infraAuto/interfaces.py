@@ -28,6 +28,7 @@ class SetorI:
     def __init__(self, setor_armazenagem, codigo_integracao,
                  area_setor, tipo_setor, permite_expedicao_produto,
                  permite_mais_produto_pulmao):
+        
         self.setor_armazenagem = setor_armazenagem
         self.codigo_integracao = codigo_integracao
         self.area_setor = area_setor

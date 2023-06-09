@@ -76,7 +76,7 @@ class Entidade:
         # Muda para o Iframe
         self.base_page.switchToCotext("slickGridFrame")
 
-        elementos_l7 = self.base_page.findByClass("l7", True)
+        elementos_l7 = self.base_page.findByClass("l7", all=True)
 
         # Encontra a empresa que esta sendo cadastrada
         for elemento in elementos_l7:

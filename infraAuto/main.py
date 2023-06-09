@@ -28,16 +28,14 @@ time.sleep(2)
 def create_entidade(base_page, sheet):
     # Iterar sobre as linhas do DataFrame
     for row in sheet.itertuples(index=False):
-        col1_value = row.fantasia
-        col2_value = row.razao_social
         entidade_page = Entidade(base_page, row)
-        # entidade_page.create()
+        entidade_page.create()
 
         depositante_page = Depositante(base_page, row)
-        # depositante_page.create()
+        depositante_page.create()
 
         api_rest = Api(base_page, row)
-        # api_rest.create()
+        api_rest.create()
 
 
 def create_setor(base_page, sheet):
