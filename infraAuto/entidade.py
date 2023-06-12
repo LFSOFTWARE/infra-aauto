@@ -39,7 +39,7 @@ class Entidade:
 
         self.base_page.WriteCNPJ(self.data.cnpj,
                                  "EntidadeDadosScreenDescriptor_cgc")
-        
+
         time.sleep(5)
         print("Create - Entidade")
         self.EletronicInvoices()
@@ -62,21 +62,20 @@ class Entidade:
     def Parameters(self):
         time.sleep(5)
         self.base_page.findAndClick("CadastroWindow_menuTreePanel-Parametros")
-        
+
         if self.data.emite_nf == 'sim':
             self.base_page.findAndClick(
                 "EntidadeParametrosScreenDescriptor_Emite Nota Fiscal")
-            
+
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeEntidadeButton")
         time.sleep(15)
-        #REMOVER ISSO
+        # REMOVER ISSO
 
     def Address(self):
         # Acessa Entidade
-        self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
-                                          "NavigationView_tree-FolderCadastroEntidade",
-                                          "NavigationView_tree-ItemEntidade"], True)
+        self.base_page.findAndClickArray([
+            "NavigationView_tree-ItemEntidade"], True)
 
         time.sleep(5)
 
@@ -97,7 +96,7 @@ class Entidade:
         self.base_page.findAndClick("tb-VincularaEntidade-Endereco")
         self.base_page.findAndClick("tb-Cadastrar")
         self.base_page.findAndWrite(
-           f"0{self.data.cep}", "EnderecoScreenDescriptor_cep", pressTab=True)
+            f"0{self.data.cep}", "EnderecoScreenDescriptor_cep", pressTab=True)
 
         time.sleep(2)
 
@@ -114,11 +113,12 @@ class Entidade:
             self.base_page.findAndClick("EnderecoScreenDescriptor_Cobranca")
 
         if self.data.endereco_fiscal == 'sim':
-            self.base_page.findAndClick("EnderecoScreenDescriptor_Endereco Fiscal")
+            self.base_page.findAndClick(
+                "EnderecoScreenDescriptor_Endereco Fiscal")
 
         if self.data.impressao == 'sim':
             self.base_page.findAndClick("EnderecoScreenDescriptor_Impressão")
-        
+
         time.sleep(5)
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeEndereçoButton")

@@ -45,7 +45,7 @@ class BasePage:
         if pressTab:
             time.sleep(2)
             element.send_keys(Keys.TAB)
-        
+
     def findAndClick(self, id):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
@@ -102,21 +102,33 @@ class BasePage:
         )
         self.driver.execute_script(
             "arguments[0].value = arguments[1];", element, value)
-        
-    def pressEnter(self,id):
+
+    def pressEnter(self, id):
         time.sleep(3)
         element = WebDriverWait(self.driver, self.time).until(
-                EC.presence_of_element_located((By.ID, id))
-            )
+            EC.presence_of_element_located((By.ID, id))
+        )
         element.send_keys(Keys.ENTER)
 
     def attribute_value_is_false(self, locator, attribute):
         element = self.driver.find_element(*locator)
         return element.get_attribute(attribute) == 'false'
-    
+
     def awaitLoad(self, timeout=60):
         wait = WebDriverWait(self.driver, timeout)
-        wait.until(lambda driver: self.attribute_value_is_false((By.ID, 'DynamicGrid_refresh'), 'aria-disabled'))
-    
+        wait.until(lambda driver: self.attribute_value_is_false(
+            (By.ID, 'DynamicGrid_refresh'), 'aria-disabled'))
+
     def arrowDown(self):
         pass
+
+    def closeTab(self):
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.ID, 'x-auto-718__x-auto-719'))
+        )
+        print(element)
+        self.actions(element).context_click().perform()
+
+        self.findAndClick("x-auto-723")
+        print("passow")
+       
