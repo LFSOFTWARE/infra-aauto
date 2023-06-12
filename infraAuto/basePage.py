@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class BasePage:
@@ -39,8 +40,10 @@ class BasePage:
         element.send_keys(value)
 
         if pressEnter:
+            time.sleep(2)
             element.send_keys(Keys.ENTER)
         if pressTab:
+            time.sleep(2)
             element.send_keys(Keys.TAB)
         
     def findAndClick(self, id):
@@ -101,7 +104,16 @@ class BasePage:
             "arguments[0].value = arguments[1];", element, value)
         
     def pressEnter(self,id):
+        time.sleep(3)
         element = WebDriverWait(self.driver, self.time).until(
                 EC.presence_of_element_located((By.ID, id))
             )
         element.send_keys(Keys.ENTER)
+
+    def attribute_value_is_false(self, locator, attribute):
+        element = self.driver.find_element(*locator)
+        return element.get_attribute(attribute) == 'false'
+    
+    def awaitLoad(self, timeout=60):
+        wait = WebDriverWait(self.driver, timeout)
+        wait.until(lambda driver: self.attribute_value_is_false((By.ID, 'DynamicGrid_refresh'), 'aria-disabled'))

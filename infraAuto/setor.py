@@ -66,22 +66,28 @@ class Setor:
 
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeSetorButton")
+        
+        print("Create - Setor")
 
     def createDepositante(self):
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                          "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemSetor"], True)
 
         self.base_page.switchToCotext("slickGridFrame")
+
         self.base_page.findAndWrite(
             self.data.setor_armazenagem, "filter-SETOR")
         self.base_page.pressEnter("filter-SETOR")
+
         time.sleep(5)
         self.base_page.findAndClick("rowNum-0")
         
         self.base_page.ReturnToMainContext()
 
         self.base_page.findAndClick("tb-VincularaoSetor-Depositantes")
+        time.sleep(5)
         self.base_page.findAndClick("SiltTransfere_buscarComboBox")
+
       #   elements = self.base_page.findByClass("r1", all=True)
       #   time.sleep(5)
 

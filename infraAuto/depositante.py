@@ -18,11 +18,15 @@ class Depositante:
         self.base_page.ReturnToMainContext()
         self.base_page.findAndClick("tb-Controle-Duplicardepositante")
         self.base_page.findAndClick("EntidadeSimple_Entidade")
-        time.sleep(2)
-        self.base_page.findAndWrite(self.data.razao_social,"SearchTriggerWindowRemote_searchTextField",pressEnter=True)
-        time.sleep(5)
+        self.base_page.findAndWrite(self.data.razao_social,"SearchTriggerWindowRemote_searchTextField")
+        self.base_page.pressEnter("SearchTriggerWindowRemote_searchTextField")
+
+        self.base_page.awaitLoad()
+
         element = self.base_page.findByClass("x-grid3-col-FANTASIA")
         element.click()
+        
         time.sleep(2)
         self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
         self.base_page.findAndClick("CadastroWindow_salvarDuplicarcadastrodedepositanteButton")
+        print("Create - Depositante")

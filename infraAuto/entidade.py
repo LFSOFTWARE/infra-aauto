@@ -39,21 +39,28 @@ class Entidade:
 
         self.base_page.WriteCNPJ(self.data.cnpj,
                                  "EntidadeDadosScreenDescriptor_cgc")
+        
+        time.sleep(5)
+        print("Create - Entidade")
         self.EletronicInvoices()
+        print("Create - Invoice")
         self.Parameters()
+        print("Create - Parameters")
         self.Address()
+        print("Create - Address")
 
     def EletronicInvoices(self):
         self.base_page.findAndClick(
             "CadastroWindow_menuTreePanel-NotaFiscalEletronica")
         self.base_page.findAndClick(
             "EntidadeNfeScreenDescriptor_tipoImpressaoDanfe")
-        
+        time.sleep(5)
         if self.data.tipo_danfe == 'PDF':
             self.base_page.findAndDoubleClick(
                 "EntidadeNfeScreenDescriptor_tipoImpressaoDanfe-1-PDF")
 
     def Parameters(self):
+        time.sleep(5)
         self.base_page.findAndClick("CadastroWindow_menuTreePanel-Parametros")
         
         if self.data.emite_nf == 'sim':
@@ -112,5 +119,6 @@ class Entidade:
         if self.data.impressao == 'sim':
             self.base_page.findAndClick("EnderecoScreenDescriptor_Impressão")
         
+        time.sleep(5)
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeEndereçoButton")
