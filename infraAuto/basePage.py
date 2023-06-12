@@ -117,3 +117,6 @@ class BasePage:
     def awaitLoad(self, timeout=60):
         wait = WebDriverWait(self.driver, timeout)
         wait.until(lambda driver: self.attribute_value_is_false((By.ID, 'DynamicGrid_refresh'), 'aria-disabled'))
+    
+    def arrowDown(self):
+        pass

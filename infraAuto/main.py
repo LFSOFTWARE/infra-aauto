@@ -28,18 +28,19 @@ time.sleep(2)
 def create_setor(base_page, sheet):
     for row in sheet.itertuples(index=False):
         setor = Setor(base_page, row)
-        setor.createDepositante()
+        setor.create()
 
 def create_entidade(base_page, sheet):
     for row in sheet.itertuples(index=False):
         entidade_page = Entidade(base_page, row)
-        # entidade_page.create()
-
+        entidade_page.create()
+        
+        time.sleep(5)
         depositante_page = Depositante(base_page, row)
-        # depositante_page.create()
+        depositante_page.create()
 
         api_rest = Api(base_page, row)
-        # api_rest.create()
+        api_rest.create()
 
         sheet_setor = sheet_class.Import('setor')
         create_setor(base_page, sheet_setor)

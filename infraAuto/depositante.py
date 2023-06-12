@@ -9,17 +9,17 @@ class Depositante:
         self.data = data
 
     def create(self):
-
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                           "NavigationView_tree-ItemDepositante"], True)
         
         self.base_page.switchToCotext("slickGridFrame")
         self.base_page.findAndClick("rowNum-0")
         self.base_page.ReturnToMainContext()
+        time.sleep(2)
         self.base_page.findAndClick("tb-Controle-Duplicardepositante")
         self.base_page.findAndClick("EntidadeSimple_Entidade")
-        self.base_page.findAndWrite(self.data.razao_social,"SearchTriggerWindowRemote_searchTextField")
-        self.base_page.pressEnter("SearchTriggerWindowRemote_searchTextField")
+        time.sleep(2)
+        self.base_page.findAndWrite(self.data.razao_social,"SearchTriggerWindowRemote_searchTextField", pressEnter=True)
 
         self.base_page.awaitLoad()
 

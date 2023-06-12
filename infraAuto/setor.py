@@ -86,7 +86,15 @@ class Setor:
 
         self.base_page.findAndClick("tb-VincularaoSetor-Depositantes")
         time.sleep(5)
-        self.base_page.findAndClick("SiltTransfere_buscarComboBox")
+        self.base_page.findAndClick("SiltTransfere_buscarComboBoxComboArrow")
+        time.sleep(5)
+        self.base_page.findAndClick("SiltTransfere_buscarComboBox-RAZAOSOCIAL")
+
+        self.base_page.findAndWrite(self.data.razao_social,"SiltTransfere_buscarText", pressEnter=True)
+        time.sleep(2)
+        self.base_page.findAndClick("x-auto-5819")
+        self.base_page.findAndClick("tb-DefinirCodigodeIntegracao")
+        time.sleep(60)
 
       #   elements = self.base_page.findByClass("r1", all=True)
       #   time.sleep(5)

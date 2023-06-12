@@ -27,7 +27,7 @@ class Empresa:
 class SetorI:
     def __init__(self, setor_armazenagem, codigo_integracao,
                  area_setor, tipo_setor, permite_expedicao_produto,
-                 permite_mais_produto_pulmao):
+                 permite_mais_produto_pulmao, razao_social):
         
         self.setor_armazenagem = setor_armazenagem
         self.codigo_integracao = codigo_integracao
@@ -35,3 +35,5 @@ class SetorI:
         self.tipo_setor = tipo_setor
         self.permite_expedicao_produto = permite_expedicao_produto
         self.permite_mais_produto_pulmao = permite_mais_produto_pulmao
+        self.razao_social = razao_social
+
