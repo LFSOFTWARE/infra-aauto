@@ -31,13 +31,10 @@ class Ftp:
 
         self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
         time.sleep(6)
-
-        if self.data.integracao_via_servico_rest == 'sim':
-            self.base_page.findAndClick(
-                "ConfiguracaoIntegracaoEntidadeScreenDescriptor_Integracão via Servico Rest")
-
+       
         self.base_page.findAndClick(
             "ConfiguracaoIntegracaoEntidadeScreenDescriptor_armazem-input")
+        
         time.sleep(2)
         elements = self.base_page.findByClass("x-grid3-col-DESCR", all=True)
 
@@ -48,7 +45,7 @@ class Ftp:
 
         self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
         self.base_page.findAndClick("CadastroWindow_menuTreePanel-Diretorios")
-        
+        time.sleep(2)
         self.base_page.inputFormMultiple([
             {"id": "ConfiguracaoIntegracaoDiretoriosScreenDescriptor_diretorioImportacao",
                 "value": self.ftp.importacao},
@@ -61,3 +58,7 @@ class Ftp:
             {"id": "ConfiguracaoIntegracaoDiretoriosScreenDescriptor_diretorioErro",
                 "value": self.ftp.erro},
         ])
+
+        self.base_page.findAndClick("CadastroWindow_salvarCadastroConfiguraçãodeIntegraçãoButton")
+        time.sleep(2)
+        self.base_page.findAndClick("WmsMessageBoxCONFIRM_YES_BUTTON")
