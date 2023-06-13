@@ -7,6 +7,8 @@ class Api:
         self.data = data
 
     def create(self):
+        self.base_page.closeTab("AbaDepositanteClose")
+        
         self.base_page.findAndClickArray(["NavigationView_tree-FolderConfiguracao",
                                           "NavigationView_tree-ItemConfiguracaodeIntegracao"], True)
         
@@ -14,9 +16,17 @@ class Api:
         self.base_page.findAndClick("ConfiguracaoIntegracaoEntidadeScreenDescriptor_entidade-input")
         self.base_page.findAndWrite(self.data.razao_social,"SearchTriggerWindowRemote_searchTextField", pressEnter=True)
         
-        time.sleep(15)
-        self.base_page.findAndClick("x-auto-924")
+      
+        time.sleep(2)
+        elements = self.base_page.findByClass("x-grid3-col-CGC", all=True)
+
+        for elemento in elements:
+            if elemento.text == self.data.cnpj:
+                elemento.click()
+                break
+
         self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
+        time.sleep(6)
 
         if self.data.integracao_via_servico_rest == 'sim':
             self.base_page.findAndClick("ConfiguracaoIntegracaoEntidadeScreenDescriptor_Integracão via Servico Rest")

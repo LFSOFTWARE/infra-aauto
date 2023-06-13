@@ -122,13 +122,17 @@ class BasePage:
     def arrowDown(self):
         pass
 
-    def closeTab(self):
-        element = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_element_located((By.ID, 'x-auto-718__x-auto-719'))
-        )
-        print(element)
-        self.actions(element).context_click().perform()
+    def closeTab(self, aba):
+        self.ReturnToMainContext()
+        self.findAndClick(aba)
 
-        self.findAndClick("x-auto-723")
-        print("passow")
-       
+    def findByMultClass(self, classes):
+        element = self.findByClass("x-grid3-body")
+        elements = element.find_elements(By.CLASS_NAME, 'x-grid3-row')
+        
+        for index, element in enumerate(elements):
+            if index == 1:
+                element.click()
+                break
+
+        

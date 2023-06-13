@@ -9,14 +9,10 @@ class Depositante:
         self.data = data
 
     def create(self):
-        self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
-                                          "NavigationView_tree-FolderCadastroEntidade",
-                                          "NavigationView_tree-ItemEntidade"], True)
+        time.sleep(5)
+        self.base_page.closeTab("AbaEntidadeClose")
         time.sleep(2)
-        
-        self.base_page.closeTab()
-        time.sleep(2)
-        self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro","NavigationView_tree-ItemDepositante"], True)
+        self.base_page.findAndClickArray(["NavigationView_tree-ItemDepositante"], True)
 
         self.base_page.ReturnToMainContext()
         self.base_page.switchToCotext("slickGridFrame")
