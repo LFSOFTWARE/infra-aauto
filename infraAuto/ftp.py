@@ -62,3 +62,4 @@ class Ftp:
         self.base_page.findAndClick("CadastroWindow_salvarCadastroConfiguraçãodeIntegraçãoButton")
         time.sleep(2)
         self.base_page.findAndClick("WmsMessageBoxCONFIRM_YES_BUTTON")
+        print("Create - FTP")

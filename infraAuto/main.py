@@ -36,20 +36,20 @@ def create_entidade(base_page, sheet):
     for empresa in sheet.itertuples(index=False):
 
         entidade_page = Entidade(base_page, empresa)
-        # entidade_page.create()
+        entidade_page.create()
 
         depositante_page = Depositante(base_page, empresa)
-        # depositante_page.create()
+        depositante_page.create()
 
         api_rest = Api(base_page, empresa)
-        # api_rest.create()
+        api_rest.create()
 
         sheet_ftp = sheet_class.Import('ftp')
         fpt = Ftp(base_page, empresa, sheet_ftp)
         fpt.create()
 
         sheet_setor = sheet_class.Import('setor')
-        # create_setor(base_page, sheet_setor, empresa)
+        create_setor(base_page, sheet_setor, empresa)
 
         time.sleep(30)
 
