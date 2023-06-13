@@ -28,7 +28,7 @@ class SetorI:
     def __init__(self, setor_armazenagem, codigo_integracao,
                  area_setor, tipo_setor, permite_expedicao_produto,
                  permite_mais_produto_pulmao, razao_social):
-        
+
         self.setor_armazenagem = setor_armazenagem
         self.codigo_integracao = codigo_integracao
         self.area_setor = area_setor
@@ -37,3 +37,12 @@ class SetorI:
         self.permite_mais_produto_pulmao = permite_mais_produto_pulmao
         self.razao_social = razao_social
 
+
+class DataFtp:
+    def __init__(self, importacao, backup_importacao, exportacao, backup_exportacao, erro):
+        self.importacao = importacao
+        self.backup_importacao = backup_importacao
+        self.exportacao = exportacao
+        self.backup_exportacao = backup_exportacao
+        self.erro = erro
+    

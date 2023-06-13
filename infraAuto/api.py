@@ -42,6 +42,6 @@ class Api:
 
         self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
         self.base_page.findAndClick("CadastroWindow_salvarCadastroConfiguraçãodeIntegraçãoButton")
-        print("Configurado - API REST")
+        print("Create - API REST")
 
         

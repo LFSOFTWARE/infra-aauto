@@ -91,11 +91,6 @@ class BasePage:
         else:
             element.click()
 
-    def selectValue(self, name, value):
-        select_element = self.driver.find_element(By.NAME, name)
-        select = Select(select_element)
-        select.select_by_visible_text(value)
-
     def WriteCNPJ(self, value, id):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
@@ -119,20 +114,8 @@ class BasePage:
         wait.until(lambda driver: self.attribute_value_is_false(
             (By.ID, 'DynamicGrid_refresh'), 'aria-disabled'))
 
-    def arrowDown(self):
-        pass
-
     def closeTab(self, aba):
         self.ReturnToMainContext()
         self.findAndClick(aba)
-
-    def findByMultClass(self, classes):
-        element = self.findByClass("x-grid3-body")
-        elements = element.find_elements(By.CLASS_NAME, 'x-grid3-row')
-        
-        for index, element in enumerate(elements):
-            if index == 1:
-                element.click()
-                break
 
         
