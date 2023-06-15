@@ -6,6 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 
 
 class BasePage:
@@ -13,7 +14,7 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
         self.actions = ActionChains(driver)
-        self.time = 50
+        self.time = 120
 
     def findById(self, id, all=False):
         element = WebDriverWait(self.driver, self.time).until(
@@ -118,4 +119,22 @@ class BasePage:
         self.ReturnToMainContext()
         self.findAndClick(aba)
 
+    def awaitSave(self, selector, class_name=False):
+
+        for seg in range(0, 60):
+            try:
+                if class_name:
+                    elemento = WebDriverWait(self.driver, 10).until(
+                        EC.presence_of_element_located((By.CLASS_NAME, selector)))
+                else:
+                    elemento = WebDriverWait(self.driver, 10).until(
+                        EC.presence_of_element_located((By.ID, selector)))
+                print("Waiting for")
+            except TimeoutException:
+                break
+
+            time.sleep(1)
         
+        print("Terminou")
+
+

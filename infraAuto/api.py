@@ -7,6 +7,8 @@ class Api:
         self.data = data
 
     def create(self):
+        time.sleep(2)
+
         self.base_page.closeTab("AbaDepositanteClose")
         
         self.base_page.findAndClickArray(["NavigationView_tree-FolderConfiguracao",
@@ -16,8 +18,9 @@ class Api:
         self.base_page.findAndClick("ConfiguracaoIntegracaoEntidadeScreenDescriptor_entidade-input")
         self.base_page.findAndWrite(self.data.razao_social,"SearchTriggerWindowRemote_searchTextField", pressEnter=True)
         
-      
+        self.base_page.awaitSave("ext-el-mask-msg",class_name=True)
         time.sleep(2)
+
         elements = self.base_page.findByClass("x-grid3-col-CGC", all=True)
 
         for elemento in elements:

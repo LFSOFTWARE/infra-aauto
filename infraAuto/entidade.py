@@ -69,8 +69,9 @@ class Entidade:
 
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeEntidadeButton")
-        time.sleep(15)
-        # REMOVER ISSO
+        
+        self.base_page.awaitSave("ext-el-mask-msg",class_name=True)
+        time.sleep(2)
 
     def Address(self):
         # Acessa Entidade

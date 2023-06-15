@@ -23,7 +23,8 @@ class Depositante:
         self.base_page.findAndClick("tb-Controle-Duplicardepositante")
         self.base_page.findAndClick("EntidadeSimple_Entidade")
         self.base_page.findAndWrite(self.data.razao_social,"SearchTriggerWindowRemote_searchTextField", pressEnter=True)
-        self.base_page.awaitLoad()
+        self.base_page.awaitSave("ext-el-mask-msg",class_name=True)
+        time.sleep(2)
         element = self.base_page.findByClass("x-grid3-col-FANTASIA")
         element.click()
         
