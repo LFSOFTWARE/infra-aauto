@@ -157,5 +157,6 @@ class BasePage:
         )
         for element in elements:
             if(element.text == "Ok"):
-                time.sleep(2)
+                time.sleep(5)
                 element.click()
+                break

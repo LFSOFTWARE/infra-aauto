@@ -100,6 +100,5 @@ class Setor:
         time.sleep(3)
         self.base_page.button_value_integration()
         time.sleep(3)
-
-        # self.base_page.findAndClickByClass("x-btn-text")
-      #   self.base_page.ReturnToMainContext()
+        self.base_page.findAndClick("SiltTransfere_fecharButton")
+       
