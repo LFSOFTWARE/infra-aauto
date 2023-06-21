@@ -79,29 +79,27 @@ class Setor:
             self.data.setor_armazenagem, "filter-SETOR")
         self.base_page.pressEnter("filter-SETOR")
 
-        time.sleep(5)
+        time.sleep(2)
         self.base_page.findAndClick("rowNum-0")
         
         self.base_page.ReturnToMainContext()
 
         self.base_page.findAndClick("tb-VincularaoSetor-Depositantes")
-        time.sleep(5)
+        time.sleep(2)
         self.base_page.findAndClick("SiltTransfere_buscarComboBoxComboArrow")
-        time.sleep(5)
+        time.sleep(2)
         self.base_page.findAndClick("SiltTransfere_buscarComboBox-RAZAOSOCIAL")
 
         self.base_page.findAndWrite(self.data.razao_social,"SiltTransfere_buscarText", pressEnter=True)
         time.sleep(2)
-        self.base_page.findAndClick("x-auto-5819")
+        self.base_page.findAndClickByClass("x-grid-cell-first")
+        time.sleep(3)
         self.base_page.findAndClick("tb-DefinirCodigodeIntegracao")
-        time.sleep(60)
+        time.sleep(3)
+        self.base_page.insert_value_integration(self.data.codigo_integracao)
+        time.sleep(3)
+        self.base_page.button_value_integration()
+        time.sleep(3)
 
-      #   elements = self.base_page.findByClass("r1", all=True)
-      #   time.sleep(5)
-
-      #   for elemento in elements:
-      #       if elemento.text == self.data.setor_armazenagem:
-      #           elemento.click()
-      #           break
-
+        # self.base_page.findAndClickByClass("x-btn-text")
       #   self.base_page.ReturnToMainContext()

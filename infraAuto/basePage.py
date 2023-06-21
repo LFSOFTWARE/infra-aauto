@@ -53,6 +53,12 @@ class BasePage:
         )
         element.click()
 
+    def findAndClickByClass(self, id):
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.CLASS_NAME, id))
+        )
+        element.click()
+
     def switchToCotext(self, id):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
@@ -134,7 +140,22 @@ class BasePage:
                 break
 
             time.sleep(1)
-        
+
         print("Terminou")
+    
+    def insert_value_integration(self, value):
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input.x-form-field.x-form-text[style='width: 268px;']"))
+                                                         
+        )
+        element.send_keys(value)
 
-
+    def button_value_integration(self):
+        elements = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "button.x-btn-text[style='position: relative; width: 69px;']"))
+                                                         
+        )
+        for element in elements:
+            if(element.text == "Ok"):
+                time.sleep(2)
+                element.click()
