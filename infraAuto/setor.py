@@ -66,7 +66,7 @@ class Setor:
 
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeSetorButton")
-        
+
         print("Create - Setor")
 
     def createDepositante(self):
@@ -81,7 +81,7 @@ class Setor:
 
         time.sleep(2)
         self.base_page.findAndClick("rowNum-0")
-        
+
         self.base_page.ReturnToMainContext()
 
         self.base_page.findAndClick("tb-VincularaoSetor-Depositantes")
@@ -90,7 +90,8 @@ class Setor:
         time.sleep(2)
         self.base_page.findAndClick("SiltTransfere_buscarComboBox-RAZAOSOCIAL")
 
-        self.base_page.findAndWrite(self.data.razao_social,"SiltTransfere_buscarText", pressEnter=True)
+        self.base_page.findAndWrite(
+            self.data.razao_social, "SiltTransfere_buscarText", pressEnter=True)
         time.sleep(2)
         self.base_page.findAndClickByClass("x-grid-cell-first")
         time.sleep(3)
@@ -101,4 +102,33 @@ class Setor:
         self.base_page.button_value_integration()
         time.sleep(3)
         self.base_page.findAndClick("SiltTransfere_fecharButton")
-       
+
+    def tipo_recebimento(self, tipos):
+            self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
+                                            "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemSetor"], True)
+
+            self.base_page.switchToCotext("slickGridFrame")
+
+            self.base_page.findAndWrite(
+                self.data.setor_armazenagem, "filter-SETOR")
+            self.base_page.pressEnter("filter-SETOR")
+
+            time.sleep(2)
+            self.base_page.findAndClick("rowNum-0")
+            
+            self.base_page.ReturnToMainContext()
+
+            self.base_page.findAndClick("tb-VincularaoSetor-TiposdeRecebimento")
+            time.sleep(2)
+            self.base_page.findAndClick("SiltTransfere_buscarComboBoxComboArrow")
+            time.sleep(2)
+            self.base_page.findAndClick("SiltTransfere_buscarComboBox-TIPORECEBIMENTO")
+            time.sleep(2)
+
+            element = self.base_page.findById("SiltTransfere_buscarText")
+            for tipo in tipos:
+                self.base_page.findAndWrite(tipo,"SiltTransfere_buscarText", pressEnter=True)
+                time.sleep(5)
+                #TODO verificar se ja esta clicado
+                self.base_page.findAndClick("grid_row_0")
+                element.clear()

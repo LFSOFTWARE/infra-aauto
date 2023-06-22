@@ -31,7 +31,8 @@ def create_setor(base_page, sheet, empresa):
         print(setor)
         setor = Setor(base_page, setor)
         # setor.create()
-        setor.createDepositante()
+        # setor.createDepositante()
+        setor.tipo_recebimento(["Recebimento de Mercadorias", "Operações Internas"])
 
 def create_entidade(base_page, sheet):
     for empresa in sheet.itertuples(index=False):
