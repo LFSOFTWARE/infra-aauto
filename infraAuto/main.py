@@ -32,7 +32,18 @@ def create_setor(base_page, sheet, empresa):
         setor = Setor(base_page, setor)
         # setor.create()
         # setor.createDepositante()
-        setor.tipo_recebimento(["Recebimento de Mercadorias", "Operações Internas"])
+        sheet_setor = sheet_class.Import('tipo_recebimento')
+        tipos_recebimento = []
+
+        for tipo in sheet_setor.itertuples(index=False):
+            tipos_recebimento.append(tipo.tipo_recebimento)
+
+        # setor.tipo_recebimento(tipos_recebimento)
+        
+        sheet_regiao_armazenagem = sheet_class.Import('regiao_armazenagem')
+        for regiao in sheet_regiao_armazenagem.itertuples(index=False):
+            setor.regiao_armazenagem(regiao)
+
 
 def create_entidade(base_page, sheet):
     for empresa in sheet.itertuples(index=False):
@@ -56,7 +67,4 @@ def create_entidade(base_page, sheet):
         time.sleep(30)
 
 
-
-
 create_entidade(base_page, sheet_entidade)
-
