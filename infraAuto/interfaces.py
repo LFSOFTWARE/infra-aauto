@@ -36,9 +36,8 @@ class SetorI:
         self.permite_expedicao_produto = permite_expedicao_produto
         self.permite_mais_produto_pulmao = permite_mais_produto_pulmao
         self.razao_social = razao_social
-        self.regiao_armazenagem	 = regiao_armazenagem
+        self.regiao_armazenagem = regiao_armazenagem
         self.tipo_armazenagem = tipo_armazenagem
-
 
 
 class DataFtp:
@@ -48,4 +47,12 @@ class DataFtp:
         self.exportacao = exportacao
         self.backup_exportacao = backup_exportacao
         self.erro = erro
-    
+
+
+class DataOr:
+    def __init__(self, codigo_tipo_recebimento,	codigo_doca, placa_veiculo, quantidade_volume_recebido,	intervalo_integracao):
+        self.codigo_tipo_recebimento = codigo_tipo_recebimento
+        self.codigo_doca = codigo_doca
+        self.placa_veiculo = placa_veiculo
+        self.quantidade_volume_recebido = quantidade_volume_recebido
+        self.intervalo_integracao = intervalo_integracao

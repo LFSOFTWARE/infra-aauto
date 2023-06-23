@@ -142,21 +142,57 @@ class BasePage:
             time.sleep(1)
 
         print("Terminou")
-    
+
     def insert_value_integration(self, value):
         element = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "input.x-form-field.x-form-text[style='width: 268px;']"))
-                                                         
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "input.x-form-field.x-form-text[style='width: 268px;']"))
+
         )
         element.send_keys(value)
 
     def button_value_integration(self):
         elements = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "button.x-btn-text[style='position: relative; width: 69px;']"))
-                                                         
+            EC.presence_of_all_elements_located(
+                (By.CSS_SELECTOR, "button.x-btn-text[style='position: relative; width: 69px;']"))
+
         )
         for element in elements:
-            if(element.text == "Ok"):
+            if (element.text == "Ok"):
                 time.sleep(5)
                 element.click()
                 break
+
+    def findAndClickByCss(self, css):
+        time.sleep(5)
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, css))
+
+        )
+        element.click()
+
+    def finAllByCssSelector(self, cssSelector, all=False):
+        if all:
+            elements = WebDriverWait(self.driver, self.time).until(
+                EC.presence_of_all_elements_located(
+                    (By.CSS_SELECTOR, cssSelector))
+            )
+
+            return elements
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, cssSelector))
+        )
+        return element
+    
+    def teste(self,data):
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'RECEBIMENTO DE MERCADORIAS - MKTP')]"))
+        ) 
+        a = element.find_element(By.XPATH, "..")
+        b = a.find_element(By.XPATH, "..")
+        c = b.find_element(By.XPATH, "..")
+        d = c.find_element(By.XPATH, "..")
+        e = d.find_element(By.XPATH, "..")
+        print(e)
+        time.sleep(10)
+        e.click()           

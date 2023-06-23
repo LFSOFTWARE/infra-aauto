@@ -8,6 +8,7 @@ from api import Api
 from setor import Setor
 from ftp import Ftp
 from selenium import webdriver
+from orPy import Or
 import time
 
 sheet_class = Sheet(
@@ -62,8 +63,11 @@ def create_entidade(base_page, sheet):
         # fpt.create()
 
         sheet_setor = sheet_class.Import('setor')
-        create_setor(base_page, sheet_setor, empresa)
+        # create_setor(base_page, sheet_setor, empresa)
 
+        sheet_or = sheet_class.Import('or')
+        or_page = Or(base_page, sheet_setor, sheet_or)
+        # or_page.create()
         time.sleep(30)
 
 

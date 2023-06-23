@@ -35,9 +35,8 @@ class Gui:
         lbl_api = tk.Label(self.window, text="Configuração da API", **estilo_label)
         lbl_api.pack()
 
-        # Botão para concluir a etapa
-        # btn_concluir = tk.Button(window, text="Concluir", command=lambda: concluir_etapa(lbl_api))
-        # btn_concluir.pack()
+        btn_concluir = tk.Button(self.window, text="Concluir", command=lambda: self.concluir_etapa(lbl_api))
+        btn_concluir.pack()
 
         rotulos = [lbl_importacao, lbl_entidade, lbl_depositante, lbl_api]
         return rotulos    
