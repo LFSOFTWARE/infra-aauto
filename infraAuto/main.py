@@ -11,7 +11,7 @@ from selenium import webdriver
 from orPy import Or
 from padrao_integracao import PadraoIntegracao
 from setor_padrao import SetorPadrao
-
+from  tipo_pedido import TipoPedido
 import time
 
 sheet_class = Sheet(
@@ -78,8 +78,11 @@ def create_entidade(base_page, sheet):
 
         setor_padrao_page = SetorPadrao(base_page, sheet_setor)
         #TODO adicionar dados
-        setor_padrao_page.create()
+        # setor_padrao_page.create()
 
+        tipo_pedido_page = TipoPedido(base_page)
+        #TODO adicionar dados
+        tipo_pedido_page.create()
 
         time.sleep(30)
 
