@@ -197,3 +197,9 @@ class BasePage:
         print(e)
         time.sleep(10)
         e.click()           
+    
+
+    def buttonDireito(self):
+
+        elment = self.finAllByCssSelector("td.x-grid3-col.x-grid3-cell.x-grid3-td-SETOR")
+        self.actions.context_click(elment).perform()

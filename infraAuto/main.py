@@ -9,8 +9,8 @@ from setor import Setor
 from ftp import Ftp
 from selenium import webdriver
 from orPy import Or
-from  padrao_integracao import PadraoIntegracao
-
+from padrao_integracao import PadraoIntegracao
+from setor_padrao import SetorPadrao
 
 import time
 
@@ -41,7 +41,6 @@ def create_setor(base_page, sheet, empresa):
 
         for tipo in sheet_setor.itertuples(index=False):
             tipos_recebimento.append(tipo.tipo_recebimento)
-
         # setor.tipo_recebimento(tipos_recebimento)
         
         sheet_regiao_armazenagem = sheet_class.Import('regiao_armazenagem')
@@ -74,7 +73,14 @@ def create_entidade(base_page, sheet):
         # or_page.create()
 
         padrao_integracao_page = PadraoIntegracao(base_page, sheet_setor)
-        padrao_integracao_page.create() 
+        #TODO adicionar dados
+        # padrao_integracao_page.create() 
+
+        setor_padrao_page = SetorPadrao(base_page, sheet_setor)
+        #TODO adicionar dados
+        setor_padrao_page.create()
+
+
         time.sleep(30)
 
 
