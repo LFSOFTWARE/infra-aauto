@@ -9,6 +9,9 @@ from setor import Setor
 from ftp import Ftp
 from selenium import webdriver
 from orPy import Or
+from  padrao_integracao import PadraoIntegracao
+
+
 import time
 
 sheet_class = Sheet(
@@ -67,7 +70,11 @@ def create_entidade(base_page, sheet):
 
         sheet_or = sheet_class.Import('or')
         or_page = Or(base_page, sheet_setor, sheet_or)
+        #TODO incomplete
         # or_page.create()
+
+        padrao_integracao_page = PadraoIntegracao(base_page, sheet_setor)
+        padrao_integracao_page.create() 
         time.sleep(30)
 
 

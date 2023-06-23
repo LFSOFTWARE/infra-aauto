@@ -38,6 +38,7 @@ class BasePage:
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
         )
+        element.clear()
         element.send_keys(value)
 
         if pressEnter:
