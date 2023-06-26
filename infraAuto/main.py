@@ -78,11 +78,11 @@ def create_entidade(base_page, sheet):
 
         setor_padrao_page = SetorPadrao(base_page, sheet_setor)
         #TODO adicionar dados
-        # setor_padrao_page.create()
+        setor_padrao_page.create()
 
-        tipo_pedido_page = TipoPedido(base_page)
-        #TODO adicionar dados
-        tipo_pedido_page.create()
+        sheet_tipo_pedido = sheet_class.Import('tipo_pedido')
+        tipo_pedido_page = TipoPedido(base_page, sheet_tipo_pedido, sheet_setor)
+        # tipo_pedido_page.create()
 
         time.sleep(30)
 

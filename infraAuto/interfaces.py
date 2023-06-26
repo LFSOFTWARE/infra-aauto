@@ -56,3 +56,9 @@ class DataOr:
         self.placa_veiculo = placa_veiculo
         self.quantidade_volume_recebido = quantidade_volume_recebido
         self.intervalo_integracao = intervalo_integracao
+
+
+class TipoPedidoI:
+    def __init__(self, codigo_integracao, descricao):
+        self.codigo_integracao = codigo_integracao
+        self.descricao = descricao

@@ -30,17 +30,22 @@ class SetorPadrao:
             if element.text == 'Setor Padrão':
                 element.click()
                 break
-            #TODO adicionar clck
-        self.base_page.findAndClick("SiltTransfere_buscarComboBox-SETOR")
+        
+        time.sleep(5)
+        self.base_page.findAndWrite(
+            "Setor", "SiltTransfere_buscarComboBox")
+
 
         self.base_page.findAndWrite("vtex%","SiltTransfere_buscarText",pressEnter=True)
         time.sleep(5)
         self.base_page.buttonDireito()
         self.base_page.findAndClick("SiltTransfere_GRID_MARCARTUDO")
 
+        time.sleep(5)
         self.base_page.findAndWrite("%DOCA%","SiltTransfere_buscarText",pressEnter=True)
-
+        
+        time.sleep(5)
         self.base_page.findAndWrite("%BANCADA%","SiltTransfere_buscarText",pressEnter=True)
 
-
+        time.sleep(2)
         self.base_page.findAndClick("SiltTransfere_fecharButton")
