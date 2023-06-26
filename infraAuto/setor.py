@@ -104,11 +104,17 @@ class Setor:
         self.base_page.findAndClick("SiltTransfere_fecharButton")
 
     def tipo_recebimento(self, tipos):
+        time.sleep(2)
+        self.base_page.closeTab("AbaSetorClose")
+        self.base_page.closeTab("AbaGerenciamentodePickingClose")
+
+        time.sleep(2)
+
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                           "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemSetor"], True)
 
         self.base_page.switchToCotext("slickGridFrame")
-
+        
         self.base_page.findAndWrite(
             self.data.setor_armazenagem, "filter-SETOR")
         self.base_page.pressEnter("filter-SETOR")
@@ -125,7 +131,6 @@ class Setor:
         self.base_page.findAndClick(
             "SiltTransfere_buscarComboBox-TIPORECEBIMENTO")
         time.sleep(2)
-
         element = self.base_page.findById("SiltTransfere_buscarText")
         for tipo in tipos:
             self.base_page.findAndWrite(

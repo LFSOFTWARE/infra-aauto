@@ -11,9 +11,13 @@ class TipoPedido:
         self.setor = setor
 
     def create(self):
+        time.sleep(2)
         self.base_page.findAndClickArray(
             ["NavigationView_tree-FolderNotaFiscal", "NavigationView_tree-ItemClassificacaoTipodePedido"], isDuble=True)
+        
+        time.sleep(50)
         self.base_page.findAndClick("tb-Controle-Cadastrar")
+
 
         self.base_page.inputFormMultiple([
             {"id": "ClassificacaoTipoPedidoScreenDescriptor_codigoIntegracao",
@@ -46,11 +50,3 @@ class TipoPedido:
         element = self.base_page.findByClass("x-grid3-col-MARCADO")
         element.click()
         self.base_page.findAndClick("SiltTransfere_fecharButton")
-
-        # elements = self.base_page.findByClass("x-grid3-col-DESCR", all=True)
-        # time.sleep(15)
-
-        # for element in elements:
-        #     if element.text == "VTEX - FATURAMENTO":
-        #         element.click()
-        #         break

@@ -85,6 +85,8 @@ class BasePage:
             else:
                 element.click()
 
+        time.sleep(2) 
+
     def inputFormMultiple(self, data):
         for obj in data:
             self.findAndWrite(obj['value'], obj['id'])

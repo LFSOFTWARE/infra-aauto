@@ -9,15 +9,8 @@ class SetorPadrao:
         self.data = data
 
     def create(self):
-        self.base_page.findAndClickArray(
-            ["NavigationView_tree-FolderCadastro", "NavigationView_tree-ItemDepositante"], True)
-        self.base_page.switchToCotext("slickGridFrame")
-        self.base_page.findAndWrite(
-            self.data.razao_social, "filter-RAZAOSOCIAL", pressEnter=True)
-
-        time.sleep(2)
-        self.base_page.findAndClick("rowNum-0")
         self.base_page.ReturnToMainContext()
+        time.sleep(5)
         self.base_page.findAndClickByCss(
             "button.x-btn-text[style='position: relative; width: 12px;']")
 

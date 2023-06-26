@@ -12,13 +12,20 @@ class PadraoIntegracao:
         self.data_padrao = data_padrao
 
     def create(self):
+        time.sleep(2)
+
+        # self.base_page.closeTab("AbaDepositanteClose")
+        # self.base_page.closeTab("AbaDanodaOrdemdeRecebimentoClose")
+
         self.base_page.findAndClickArray(
             ["NavigationView_tree-FolderCadastro", "NavigationView_tree-ItemDepositante"], True)
         self.base_page.switchToCotext("slickGridFrame")
+
         self.base_page.findAndWrite(
             self.data.razao_social, "filter-RAZAOSOCIAL", pressEnter=True)
-
-        time.sleep(2)
+        
+        time.sleep(10)
+        
         self.base_page.findAndClick("rowNum-0")
         self.base_page.ReturnToMainContext()
         self.base_page.findAndClickByCss(
@@ -26,6 +33,8 @@ class PadraoIntegracao:
 
         elements = self.base_page.finAllByCssSelector(
             "a.x-menu-item.x-component", all=True)
+
+        time.sleep(10)
 
         for element in elements:
             if element.text == 'Padrão de Integração':
