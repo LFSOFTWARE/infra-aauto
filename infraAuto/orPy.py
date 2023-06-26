@@ -36,10 +36,38 @@ class Or:
         self.base_page.findAndWrite(self.data_or.codigo_tipo_recebimento,
                                     "SearchTriggerWindowRemote_searchTextField", pressEnter=True)
         
-        # self.base_page.teste(self.data_or)
-        # self.base_page.inputFormMultiple([
-        #     {"id":"DepositanteConfiguracaoORAutomaticaScreenDescriptor_placaVeiculo", "value":"x"},
-        #     {"id":"DepositanteConfiguracaoORAutomaticaScreenDescriptor_placaVeiculo", "value":"x"},
-        #     {"id":"DepositanteConfiguracaoORAutomaticaScreenDescriptor_placaVeiculo", "value":"x"},
 
-        # ])
+        time.sleep(15)
+        elements =  self.base_page.finAllByCssSelector("div.x-grid3-cell-inner.x-grid3-col-TIPORECEBIMENTO", all=True)
+        for element in elements:
+            if element.text == self.data_or.codigo_tipo_recebimento.item():
+                element.click()
+                break
+        self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
+
+        self.base_page.findAndClick("DepositanteConfiguracaoORAutomaticaScreenDescriptor_doca-input")
+
+        self.base_page.findAndWrite(self.data_or.codigo_doca.item(),
+                                    "SearchTriggerWindowRemote_searchTextField", pressEnter=True)
+        
+
+        time.sleep(15)
+        elements =  self.base_page.finAllByCssSelector("div.x-grid3-col-Doca", all=True)
+        for element in elements:
+            if element.text ==  '0'+str(self.data_or.codigo_doca.item()):
+                element.click()
+                break
+            print(element.text)
+            print( self.data_or.codigo_doca.item())
+        
+        self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
+
+        
+        self.base_page.inputFormMultiple([
+            {"id":"DepositanteConfiguracaoORAutomaticaScreenDescriptor_placaVeiculo", "value":self.data_or.placa_veiculo.item()},
+            {"id":"DepositanteConfiguracaoORAutomaticaScreenDescriptor_qtdVolume", "value":self.data_or.quantidade_volume_recebido.item()},
+            {"id":"DepositanteConfiguracaoORAutomaticaScreenDescriptor_intervaloIntegracao", "value":self.data_or.intervalo_integracao.item()},
+
+        ])
+
+        self.base_page.findAndClickByCss("button.x-btn-text[style='position: relative; width: 69px;']")

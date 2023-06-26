@@ -69,7 +69,6 @@ def create_entidade(base_page, sheet):
 
         sheet_or = sheet_class.Import('or')
         or_page = Or(base_page, sheet_setor, sheet_or)
-        #TODO incomplete
         or_page.create()
 
         sheet_padroa_integracao = sheet_class.Import('padrao_integracao')
