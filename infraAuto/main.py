@@ -70,15 +70,15 @@ def create_entidade(base_page, sheet):
         sheet_or = sheet_class.Import('or')
         or_page = Or(base_page, sheet_setor, sheet_or)
         #TODO incomplete
-        # or_page.create()
+        or_page.create()
 
-        padrao_integracao_page = PadraoIntegracao(base_page, sheet_setor)
-        #TODO adicionar dados
-        # padrao_integracao_page.create() 
+        sheet_padroa_integracao = sheet_class.Import('padrao_integracao')
+        padrao_integracao_page = PadraoIntegracao(base_page, sheet_setor, sheet_padroa_integracao)
+        # padrao_integracao_page.create()
 
         setor_padrao_page = SetorPadrao(base_page, sheet_setor)
-        #TODO adicionar dados
-        setor_padrao_page.create()
+        #TODO verificar sobre docas e barracas
+        # setor_padrao_page.create()
 
         sheet_tipo_pedido = sheet_class.Import('tipo_pedido')
         tipo_pedido_page = TipoPedido(base_page, sheet_tipo_pedido, sheet_setor)

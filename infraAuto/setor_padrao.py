@@ -1,7 +1,5 @@
 from basePage import BasePage
-from interfaces import Empresa
 from interfaces import SetorI
-from interfaces import DataOr
 import time
 
 

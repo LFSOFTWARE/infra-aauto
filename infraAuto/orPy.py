@@ -36,7 +36,7 @@ class Or:
         self.base_page.findAndWrite(self.data_or.codigo_tipo_recebimento,
                                     "SearchTriggerWindowRemote_searchTextField", pressEnter=True)
         
-        self.base_page.teste(self.data_or)
+        # self.base_page.teste(self.data_or)
         # self.base_page.inputFormMultiple([
         #     {"id":"DepositanteConfiguracaoORAutomaticaScreenDescriptor_placaVeiculo", "value":"x"},
         #     {"id":"DepositanteConfiguracaoORAutomaticaScreenDescriptor_placaVeiculo", "value":"x"},
