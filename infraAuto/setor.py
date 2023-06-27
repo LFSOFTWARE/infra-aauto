@@ -10,6 +10,7 @@ class Setor:
         self.data = data
 
     def create(self):
+        print(self.data)
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                          "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemSetor"], True)
 
@@ -79,8 +80,10 @@ class Setor:
             self.data.setor_armazenagem, "filter-SETOR")
         self.base_page.pressEnter("filter-SETOR")
 
-        time.sleep(2)
+        time.sleep(5)
+        print("aqi")
         self.base_page.findAndClick("rowNum-0")
+        print("passou")
 
         self.base_page.ReturnToMainContext()
 
