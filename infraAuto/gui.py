@@ -1,5 +1,23 @@
 import tkinter as tk
 from tkinter import filedialog
+from basePage import BasePage
+
+from sheet import Sheet
+from login import Login
+from entidade import Entidade
+from depositante import Depositante
+from api import Api
+from setor import Setor
+from ftp import Ftp
+from selenium import webdriver
+from orPy import Or
+from padrao_integracao import PadraoIntegracao
+from setor_padrao import SetorPadrao
+from  tipo_pedido import TipoPedido
+import time
+
+sheet_class = Sheet(
+    "C:/Users/luiz_/workspace/pessoal/infra-auto/infraAuto/silt-template.xlsx")
 
 def import_python_file():
   file_path = filedialog.askopenfilename(title="Selecione um arquivo Excel", filetypes=[("Arquivos Excel", "*.xlsx")])

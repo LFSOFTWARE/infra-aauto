@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
-
+from selenium.common.exceptions import ElementNotInteractableException
 
 class BasePage:
 
@@ -38,7 +38,12 @@ class BasePage:
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, id))
         )
-        element.clear()
+        time.sleep(2)
+        try:
+            element.clear()
+        except ElementNotInteractableException:
+            pass
+        time.sleep(2)
         element.send_keys(value)
 
         if pressEnter:
@@ -53,6 +58,14 @@ class BasePage:
             EC.presence_of_element_located((By.ID, id))
         )
         element.click()
+    def closeAll(self):
+        elements = self.finAllByCssSelector("a.x-tab-strip-close", all=True)
+        for element in elements:
+            try: 
+                element.click()
+            except Exception as e:
+                 print(f"Ocorreu uma exceção: {type(e).__name__}: {str(e)}")
+            time.sleep(2)
 
     def findAndClickByClass(self, id):
         element = WebDriverWait(self.driver, self.time).until(
@@ -189,18 +202,22 @@ class BasePage:
     
     def teste(self,data):
         element = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'RECEBIMENTO DE MERCADORIAS - MKTP')]"))
+            EC.presence_of_element_located((By.ID, "filter-SETOR"))
         ) 
-        a = element.find_element(By.XPATH, "..")
-        b = a.find_element(By.XPATH, "..")
-        c = b.find_element(By.XPATH, "..")
-        d = c.find_element(By.XPATH, "..")
-        e = d.find_element(By.XPATH, "..")
-        print(e)
-        time.sleep(10)
-        e.click()           
-    
 
+        # Limpar o conteúdo atual do elemento
+        self.driver.execute_script("arguments[0].value = '';", element)
+
+        # Escrever o texto no elemento
+        self.driver.execute_script("arguments[0].value = arguments[1];", element, data)
+
+        # Pressionar a tecla Enter
+        self.driver.execute_script("arguments[0].dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));", element)
+        time.sleep(8)
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.ID, "rowNum-0"))
+        )     
+        self.driver.execute_script("arguments[0].click();", element)
     def buttonDireito(self):
 
         elment = self.finAllByCssSelector("td.x-grid3-col.x-grid3-cell.x-grid3-td-SETOR")

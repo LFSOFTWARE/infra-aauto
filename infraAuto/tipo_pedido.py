@@ -12,12 +12,19 @@ class TipoPedido:
 
     def create(self):
         time.sleep(2)
+        self.base_page.closeTab("AbaDepositanteClose")
         self.base_page.findAndClickArray(
             ["NavigationView_tree-FolderNotaFiscal", "NavigationView_tree-ItemClassificacaoTipodePedido"], isDuble=True)
         
-        time.sleep(50)
         self.base_page.findAndClick("tb-Controle-Cadastrar")
+        # element = self.base_page.findById("tb-Controle-Cadastrar")
+        # time.sleep(25)
 
+        # print(element)
+        # time.sleep(2)
+
+        # element.click()
+        # time.sleep(2)
 
         self.base_page.inputFormMultiple([
             {"id": "ClassificacaoTipoPedidoScreenDescriptor_codigoIntegracao",
@@ -29,7 +36,7 @@ class TipoPedido:
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastro-ClassificaçãoTipodePedidoButton")
         # self.base_page.awaitSave()
-
+        time.sleep(5)
         self.base_page.switchToCotext("slickGridFrame")
         self.base_page.findAndWrite(
             self.data.descricao, "filter-DESCRICAO", pressEnter=True)

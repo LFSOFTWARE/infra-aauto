@@ -105,47 +105,47 @@ class Setor:
 
     def tipo_recebimento(self, tipos):
         time.sleep(2)
-        self.base_page.closeTab("AbaSetorClose")
-        self.base_page.closeTab("AbaGerenciamentodePickingClose")
-
-        time.sleep(2)
 
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                           "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemSetor"], True)
-
+       
+        time.sleep(5)
         self.base_page.switchToCotext("slickGridFrame")
-        
-        self.base_page.findAndWrite(
-            self.data.setor_armazenagem, "filter-SETOR")
-        self.base_page.pressEnter("filter-SETOR")
-
         time.sleep(2)
-        self.base_page.findAndClick("rowNum-0")
+
+        # self.base_page.findAndWrite(
+        #     self.data.setor_armazenagem, "filter-SETOR", pressEnter=True)
+        # time.sleep(10)
+
+        # self.base_page.findAndClick("rowNum-0")
 
         self.base_page.ReturnToMainContext()
-
         self.base_page.findAndClick("tb-VincularaoSetor-TiposdeRecebimento")
-        time.sleep(2)
+        time.sleep(5)
         self.base_page.findAndClick("SiltTransfere_buscarComboBoxComboArrow")
-        time.sleep(2)
+        time.sleep(5)
         self.base_page.findAndClick(
             "SiltTransfere_buscarComboBox-TIPORECEBIMENTO")
+        
         time.sleep(2)
         element = self.base_page.findById("SiltTransfere_buscarText")
         for tipo in tipos:
             self.base_page.findAndWrite(
                 tipo, "SiltTransfere_buscarText", pressEnter=True)
             time.sleep(5)
-            # TODO verificar se ja esta clicado
+
             self.base_page.findAndClick("grid_row_0")
             element.clear()
 
         self.base_page.findAndClick("SiltTransfere_fecharButton")
 
     def regiao_armazenagem(self, data):
-        self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
-                                          "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemRegiaodeArmazenagem"], True)
+        # time.sleep(30)
+        # self.base_page.closeAll()
+        time.sleep(25)
 
+        self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
+                                          "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemRegiaodeArmazenagem"], True)     
         self.base_page.findAndClick("tb-Controle-Cadastrar")
         self.base_page.findAndWrite(
             data.regiao_armazenagem, "RegiaoDeArmazenagemScreenDescriptor_descricao")
