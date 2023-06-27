@@ -31,7 +31,7 @@ class Api:
         self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
         time.sleep(6)
 
-        if self.data.integracao_via_servico_rest == 'sim':
+        if self.data.integracao_via_servico_rest.upper() == 'SIM':
             self.base_page.findAndClick("ConfiguracaoIntegracaoEntidadeScreenDescriptor_Integracão via Servico Rest")
             
         self.base_page.findAndClick("ConfiguracaoIntegracaoEntidadeScreenDescriptor_armazem-input")

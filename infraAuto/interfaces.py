@@ -27,7 +27,7 @@ class Empresa:
 class SetorI:
     def __init__(self, setor_armazenagem, codigo_integracao,
                  area_setor, tipo_setor, permite_expedicao_produto,
-                 permite_mais_produto_pulmao, razao_social, regiao_armazenagem,	tipo_armazenagem):
+                 permite_mais_produto_pulmao, razao_social, regiao_armazenagem,	tipo_armazenagem, tipo_recebimento):
 
         self.setor_armazenagem = setor_armazenagem
         self.codigo_integracao = codigo_integracao
@@ -38,6 +38,7 @@ class SetorI:
         self.razao_social = razao_social
         self.regiao_armazenagem = regiao_armazenagem
         self.tipo_armazenagem = tipo_armazenagem
+        self.tipo_recebimento = tipo_recebimento
 
 
 class DataFtp:

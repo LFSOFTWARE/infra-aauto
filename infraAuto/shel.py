@@ -13,6 +13,8 @@ from padrao_integracao import PadraoIntegracao
 from setor_padrao import SetorPadrao
 from tipo_pedido import TipoPedido
 import time
+from typing import Any
+from typing import Optional
 
 sheet_class = Sheet(
     "C:/Users/luiz_/workspace/pessoal/infra-auto/infraAuto/silt-template.xlsx")
@@ -28,13 +30,18 @@ base_page = BasePage(driver)
 login_page = Login(base_page)
 login_page.Login("LUIZ.SSANTOS", "Dankicode2002")
 time.sleep(2)
+
+setor: Optional[Setor] = None 
+
 while True:
     print("Bem Vindo")
     print("1 - Criar Entidade e suas configurações")
     print("2 - Criar Setor e Depositante")
-    print("3 - Criar Tipo recebimento")
-    print("1 - Importar Entidade e suas configurações")
-    print("1 - Importar Entidade e suas configurações")
+    print("4 - Criar Regiao Armazenagem")
+    print("5 - Importar Entidade e suas configurações")
+    print("6 - Importar Entidade e suas configurações")
+    print("7 - Importar Entidade e suas configurações")
+    print("8 - Importar Entidade e suas configurações")
 
     op = int(input(""))
 
@@ -69,8 +76,21 @@ while True:
             tipos_recebimento.append(tipo.tipo_recebimento)
             setor.tipo_recebimento(tipos_recebimento)
     elif op == 4:
-        pass
+        sheet_regiao_armazenagem = sheet_class.Import('regiao_armazenagem')
+        
+        for regiao in sheet_regiao_armazenagem.itertuples(index=False):
+            setor.regiao_armazenagem(regiao)
+
+        print("Create - Regiao Armazenagem")
     elif op == 5:
         pass
     elif op == 6:
         pass
+    elif op == 7:
+            pass
+    elif op == 8:
+            pass
+    elif op == 9:
+            pass
+    elif op == 10:
+            pass

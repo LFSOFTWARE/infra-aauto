@@ -63,7 +63,7 @@ class Entidade:
         time.sleep(5)
         self.base_page.findAndClick("CadastroWindow_menuTreePanel-Parametros")
 
-        if self.data.emite_nf == 'sim':
+        if self.data.emite_nf.upper() == 'SIM':
             self.base_page.findAndClick(
                 "EntidadeParametrosScreenDescriptor_Emite Nota Fiscal")
 
@@ -107,17 +107,17 @@ class Entidade:
             {"id": "EnderecoScreenDescriptor_numero", "value": self.data.numero},
         ])
 
-        if self.data.entrega == 'sim':
+        if self.data.entrega.upper() == 'SIM':
             self.base_page.findAndClick("EnderecoScreenDescriptor_Entrega")
 
-        if self.data.cobranca == 'sim':
+        if self.data.cobranca.upper() == 'SIM':
             self.base_page.findAndClick("EnderecoScreenDescriptor_Cobranca")
 
-        if self.data.endereco_fiscal == 'sim':
+        if self.data.endereco_fiscal.upper() == 'SIM':
             self.base_page.findAndClick(
                 "EnderecoScreenDescriptor_Endereco Fiscal")
 
-        if self.data.impressao == 'sim':
+        if self.data.impressao.upper() == 'SIM':
             self.base_page.findAndClick("EnderecoScreenDescriptor_Impressão")
 
         time.sleep(5)

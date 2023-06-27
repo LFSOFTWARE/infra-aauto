@@ -57,10 +57,10 @@ class Setor:
 
         self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
 
-        if self.data.permite_expedicao_produto == 'sim':
+        if self.data.permite_expedicao_produto.upper() == 'SIM':
             self.base_page.findAndClick(
                 "SetorScreenDescriptor_Permite Expedicão de Produto")
-        if self.data.permite_mais_produto_pulmao == 'sim':
+        if self.data.permite_mais_produto_pulmao.upper() == 'SIM':
             self.base_page.findAndClick(
                 "SetorScreenDescriptor_Permite mais de um produto no pulmão")
 
@@ -102,6 +102,7 @@ class Setor:
         self.base_page.button_value_integration()
         time.sleep(3)
         self.base_page.findAndClick("SiltTransfere_fecharButton")
+        print("Create - Depositante")
 
     def tipo_recebimento(self, tipos):
         time.sleep(2)
@@ -138,6 +139,9 @@ class Setor:
             element.clear()
 
         self.base_page.findAndClick("SiltTransfere_fecharButton")
+
+        print("Create - Tipo Recebimento")
+
 
     def regiao_armazenagem(self, data):
         # time.sleep(30)

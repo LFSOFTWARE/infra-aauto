@@ -19,14 +19,14 @@ sheet_class = Sheet(
 
 sheet_entidade = sheet_class.Import('entidade')
 
-url_base = "https://synapcomhml2.seniorcloud.com.br/siltwms/"
+url_base = "https://wms.synapcom.com.br/siltwms/"
 driver = webdriver.Chrome()
 driver.get(url_base)
 
 base_page = BasePage(driver)
 
 login_page = Login(base_page)
-login_page.Login("LUIZ.SSANTOS", "Dankicode2002")
+login_page.Login("luiz.ssantos", "Dankicode2002")
 time.sleep(2)
 
 
