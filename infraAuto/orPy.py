@@ -6,20 +6,21 @@ import time
 
 
 class Or:
-    def __init__(self, base_page: BasePage, data: SetorI, data_or: DataOr):
+    def __init__(self, base_page: BasePage, data: SetorI, data_or: DataOr, data_empresa: Empresa):
         self.base_page = base_page
         self.data = data
         self.data_or = data_or
+        self.data_empresa = data_empresa
 
     def create(self):
         time.sleep(2)
-        self.base_page.closeTab("AbaRegiaodeArmazenagemClose")
+        # self.base_page.closeTab("AbaRegiaodeArmazenagemClose")
         self.base_page.findAndClickArray(
             ["NavigationView_tree-FolderCadastro", "NavigationView_tree-ItemDepositante"], True)
         
         self.base_page.switchToCotext("slickGridFrame")
         self.base_page.findAndWrite(
-            self.data.razao_social, "filter-RAZAOSOCIAL", pressEnter=True)
+            self.data_empresa.razao_social, "filter-RAZAOSOCIAL", pressEnter=True)
         time.sleep(2)
         print("travou")
         self.base_page.findAndClick("rowNum-0")

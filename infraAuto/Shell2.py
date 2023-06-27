@@ -51,14 +51,15 @@ class InfraAuto:
 
     def create_setor(self):
         sheet_setor = self.sheet_class.Import('setor')
+        index = 0
         for setor_data in sheet_setor.itertuples(index=False):
-            
             self.setor = Setor(self.base_page, setor_data)
-            self.setor.create()
-            self.setor.createDepositante()
+            # self.setor.create()
+            # self.setor.createDepositante()
             tipos_recebimentos =  setor_data.tipo_recebimento.split(";")
-            self.setor.tipo_recebimento(tipos_recebimentos)
-
+            self.setor.tipo_recebimento(tipos_recebimentos, index)
+            index += 1;
+    
     def create_regiao_armazenagem(self):
         if self.setor is not None:
             sheet_regiao_armazenagem = self.sheet_class.Import('regiao_armazenagem')
@@ -81,15 +82,14 @@ class InfraAuto:
         padrao_integracao_page.create()
     
     def create_setor_padrao(self):
-        sheet_setor = self.sheet_class.Import('setor')
-        setor_padrao_page = SetorPadrao(self.base_page, sheet_setor)
+        setor_padrao_page = SetorPadrao(self.base_page)
         setor_padrao_page.create()
     
     def create_tipo_pedido(self):
         sheet_tipo_pedido = self.sheet_class.Import('tipo_pedido')
         tipo_pedido_page = TipoPedido(self.base_page, sheet_tipo_pedido, self.sheet_setor)
         tipo_pedido_page.create()
-        
+
     def run(self):
         while True:
             print("Bem Vindo")

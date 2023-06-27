@@ -81,9 +81,7 @@ class Setor:
         self.base_page.pressEnter("filter-SETOR")
 
         time.sleep(5)
-        print("aqi")
         self.base_page.findAndClick("rowNum-0")
-        print("passou")
 
         self.base_page.ReturnToMainContext()
 
@@ -107,21 +105,21 @@ class Setor:
         self.base_page.findAndClick("SiltTransfere_fecharButton")
         print("Create - Depositante")
 
-    def tipo_recebimento(self, tipos):
+    def tipo_recebimento(self, tipos, index):
         time.sleep(2)
-
-        self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
+        if index == 0:
+            self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                           "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemSetor"], True)
        
         time.sleep(5)
         self.base_page.switchToCotext("slickGridFrame")
         time.sleep(2)
 
-        # self.base_page.findAndWrite(
-        #     self.data.setor_armazenagem, "filter-SETOR", pressEnter=True)
-        # time.sleep(10)
+        self.base_page.findAndWrite(
+            self.data.setor_armazenagem, "filter-SETOR", pressEnter=True)
+        time.sleep(10)
 
-        # self.base_page.findAndClick("rowNum-0")
+        self.base_page.findAndClick("rowNum-0")
 
         self.base_page.ReturnToMainContext()
         self.base_page.findAndClick("tb-VincularaoSetor-TiposdeRecebimento")

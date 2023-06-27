@@ -39,11 +39,11 @@ def create_setor(base_page, sheet, empresa):
 
         print("Create - Depositante")
         time.sleep(25)
-        sheet_setor = sheet_class.Import('tipo_recebimento')
+        # sheet_setor = sheet_class.Import('tipo_recebimento')
         tipos_recebimento = []
 
-        for tipo in sheet_setor.itertuples(index=False):
-            tipos_recebimento.append(tipo.tipo_recebimento)
+        # for tipo in sheet_setor.itertuples(index=False):
+        #     tipos_recebimento.append(tipo.tipo_recebimento)
         # setor.tipo_recebimento(tipos_recebimento)
 
         print("Create - Tipo Recebimento")
@@ -73,10 +73,10 @@ def create_entidade(base_page, sheet):
         # fpt.create()
 
         sheet_setor = sheet_class.Import('setor')
-        create_setor(base_page, sheet_setor, empresa)
+        # create_setor(base_page, sheet_setor, empresa)
 
         sheet_or = sheet_class.Import('or')
-        or_page = Or(base_page, sheet_setor, sheet_or)
+        or_page = Or(base_page, sheet_setor, sheet_or, empresa)
         # or_page.create()
 
         print("Create - Or")
@@ -87,8 +87,8 @@ def create_entidade(base_page, sheet):
 
         print("Create - Padrao Integracao")
 
-        setor_padrao_page = SetorPadrao(base_page, sheet_setor)
-        # setor_padrao_page.create()
+        setor_padrao_page = SetorPadrao(base_page)
+        setor_padrao_page.create()
 
         print("Create - Setor Padrao")
 

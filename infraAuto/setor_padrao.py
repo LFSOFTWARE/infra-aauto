@@ -4,9 +4,8 @@ import time
 
 
 class SetorPadrao:
-    def __init__(self, base_page: BasePage, data: SetorI,):
+    def __init__(self, base_page: BasePage):
         self.base_page = base_page
-        self.data = data
 
     def create(self):
         self.base_page.ReturnToMainContext()

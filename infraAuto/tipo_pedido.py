@@ -12,7 +12,7 @@ class TipoPedido:
 
     def create(self):
         time.sleep(2)
-        self.base_page.closeTab("AbaDepositanteClose")
+        # self.base_page.closeTab("AbaDepositanteClose")
         self.base_page.findAndClickArray(
             ["NavigationView_tree-FolderNotaFiscal", "NavigationView_tree-ItemClassificacaoTipodePedido"], isDuble=True)
         
@@ -51,7 +51,7 @@ class TipoPedido:
             "Descrição", "SiltTransfere_buscarComboBox")
 
         self.base_page.findAndWrite(
-            self.setor.setor_armazenagem, "SiltTransfere_buscarText", pressEnter=True)
+            self.data.setor, "SiltTransfere_buscarText", pressEnter=True)
         time.sleep(5)
 
         element = self.base_page.findByClass("x-grid3-col-MARCADO")
