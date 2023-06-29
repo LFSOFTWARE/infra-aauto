@@ -69,13 +69,22 @@ class TipoPedidoI:
 
 
 class PadraoIntegracaoI:
-    def __init__(self, tipo_palete_completo, tipo_palete_incompleto, tipo_palete_sobra, tipo_palete_unidade, quantidade_maxima_picking):
+    def __init__(self, tipo_palete_completo, tipo_palete_incompleto, tipo_palete_sobra,
+                 tipo_palete_unidade, quantidade_maxima_picking, ativo,	picking_dinamico,
+                 aceita_qualquer_barra, percentual_capacidade, coleta_lote_industria,	coletar_vencimento_lote
+                 ):
 
         self.tipo_palete_completo = tipo_palete_completo
         self.tipo_palete_incompleto = tipo_palete_incompleto
         self.tipo_palete_sobra = tipo_palete_sobra
         self.tipo_palete_unidade = tipo_palete_unidade
         self.quantidade_maxima_picking = quantidade_maxima_picking
+        self.ativo = ativo
+        self.picking_dinamico = picking_dinamico
+        self.aceita_qualquer_barra = aceita_qualquer_barra
+        self.percentual_capacidade = percentual_capacidade
+        self.coleta_lote_industria = coleta_lote_industria
+        self.coletar_vencimento_lote = coletar_vencimento_lote
 
 
 class SetorPadraoI:

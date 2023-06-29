@@ -83,8 +83,10 @@ class InfraAuto:
     def create_padrao_integracao(self):
         sheet_setor = self.sheet_class.Import('setor')
         sheet_padroa_integracao = self.sheet_class.Import('padrao_integracao')
+        sheet_entidade = self.sheet_class.Import('entidade')
+
         padrao_integracao_page = PadraoIntegracao(
-            self.base_page, sheet_setor, sheet_padroa_integracao)
+            self.base_page, sheet_setor, sheet_padroa_integracao, sheet_entidade)
         padrao_integracao_page.create()
 
     def create_setor_padrao(self):
@@ -127,13 +129,11 @@ class InfraAuto:
             elif op == 4:
                 pass
             elif op == 5:
-                pass
+                self.create_padrao_integracao()
             elif op == 6:
                 self.create_setor_padrao()
-                pass
             elif op == 7:
                 self.create_tipo_pedido()
-                pass
             elif op == 0:
                 break
 infra_auto = InfraAuto()

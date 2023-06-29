@@ -6,10 +6,11 @@ import time
 
 
 class PadraoIntegracao:
-    def __init__(self, base_page: BasePage, data: SetorI,  data_padrao: PadraoIntegracaoI):
+    def __init__(self, base_page: BasePage, data: SetorI,  data_padrao: PadraoIntegracaoI, empresa: Empresa):
         self.base_page = base_page
         self.data = data
         self.data_padrao = data_padrao
+        self.empresa = empresa
 
     def create(self):
         time.sleep(2)
@@ -22,7 +23,7 @@ class PadraoIntegracao:
         self.base_page.switchToCotext("slickGridFrame")
 
         self.base_page.findAndWrite(
-            self.data.razao_social, "filter-RAZAOSOCIAL", pressEnter=True)
+            self.empresa.razao_social.item(), "filter-RAZAOSOCIAL", pressEnter=True)
         
         time.sleep(10)
         
@@ -84,6 +85,22 @@ class PadraoIntegracao:
             if element.text == self.data_padrao.tipo_palete_unidade.item():
                 element.click()
                 break
+        
+        
+        if self.data_padrao.ativo.upper() == 'SIM':
+            pass
+        if self.data_padrao.picking_dinamico.upper() == 'SIM':
+            pass
+        if self.data_padrao.aceita_qualquer_barra.upper() == 'SIM':
+            pass
+        if self.data_padrao.percentual_capacidade.upper() == 'SIM':
+            pass
+        if self.data_padrao.coleta_lote_industria.upper() == 'SIM':
+            pass
+        if self.data_padrao.coletar_vencimento_lote.upper() == 'SIM':
+            pass
+      
+
 
         self.base_page.findAndWrite(self.data_padrao.quantidade_maxima_picking.item(),
                                     "PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_qtdeMaxPicking")
