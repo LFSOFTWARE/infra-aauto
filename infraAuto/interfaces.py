@@ -70,9 +70,16 @@ class TipoPedidoI:
 
 class PadraoIntegracaoI:
     def __init__(self, tipo_palete_completo, tipo_palete_incompleto, tipo_palete_sobra, tipo_palete_unidade, quantidade_maxima_picking):
-        
+
         self.tipo_palete_completo = tipo_palete_completo
         self.tipo_palete_incompleto = tipo_palete_incompleto
         self.tipo_palete_sobra = tipo_palete_sobra
         self.tipo_palete_unidade = tipo_palete_unidade
         self.quantidade_maxima_picking = quantidade_maxima_picking
+
+
+class SetorPadraoI:
+    def __init__(self, doca, bancada, prefix):
+        self.doca = doca
+        self.bancada = bancada
+        self.prefix = prefix
