@@ -14,7 +14,7 @@ from tipo_pedido import TipoPedido
 from interfaces import SetorI
 
 import time
-from typing import Optional
+
 
 class InfraAuto:
     def __init__(self):
@@ -24,13 +24,13 @@ class InfraAuto:
         self.setor = None
 
     def start(self):
-        url_base = "https://wms.synapcom.com.br/siltwms/"
+        url_base = "https://synapcomhml2.seniorcloud.com.br/siltwms/"
         driver = webdriver.Chrome()
         driver.get(url_base)
         self.base_page = BasePage(driver)
 
         login_page = Login(self.base_page)
-        login_page.Login("luiz.ssantos", "Dankicode2002")
+        login_page.Login("LUIZ.SSANTOS", "Dankicode2002")
         time.sleep(2)
 
     def create_entidade(self):
@@ -51,18 +51,23 @@ class InfraAuto:
 
     def create_setor(self):
         sheet_setor = self.sheet_class.Import('setor')
-        index = 0
+
+        # for setor_data in sheet_setor.itertuples(index=False):
+        #     self.setor = Setor(self.base_page, setor_data)
+        #     self.setor.create()
+
         for setor_data in sheet_setor.itertuples(index=False):
             self.setor = Setor(self.base_page, setor_data)
-            # self.setor.create()
-            # self.setor.createDepositante()
-            tipos_recebimentos =  setor_data.tipo_recebimento.split(";")
-            self.setor.tipo_recebimento(tipos_recebimentos, index)
-            index += 1;
-    
+            self.setor.createDepositante()
+        for setor_data in sheet_setor.itertuples(index=False):
+            self.setor = Setor(self.base_page, setor_data)
+            tipos_recebimentos = setor_data.tipo_recebimento.split(";")
+            self.setor.tipo_recebimento(tipos_recebimentos)
+
     def create_regiao_armazenagem(self):
         if self.setor is not None:
-            sheet_regiao_armazenagem = self.sheet_class.Import('regiao_armazenagem')
+            sheet_regiao_armazenagem = self.sheet_class.Import(
+                'regiao_armazenagem')
             for regiao in sheet_regiao_armazenagem.itertuples(index=False):
                 self.setor.regiao_armazenagem(regiao)
             print("Create - Regiao Armazenagem")
@@ -78,16 +83,19 @@ class InfraAuto:
     def create_padrao_integracao(self):
         sheet_setor = self.sheet_class.Import('setor')
         sheet_padroa_integracao = self.sheet_class.Import('padrao_integracao')
-        padrao_integracao_page = PadraoIntegracao(self.base_page, sheet_setor, sheet_padroa_integracao)
+        padrao_integracao_page = PadraoIntegracao(
+            self.base_page, sheet_setor, sheet_padroa_integracao)
         padrao_integracao_page.create()
-    
+
     def create_setor_padrao(self):
         setor_padrao_page = SetorPadrao(self.base_page)
         setor_padrao_page.create()
-    
+
     def create_tipo_pedido(self):
         sheet_tipo_pedido = self.sheet_class.Import('tipo_pedido')
-        tipo_pedido_page = TipoPedido(self.base_page, sheet_tipo_pedido, self.sheet_setor)
+        sheet_setor = self.sheet_class.Import('setor')
+        tipo_pedido_page = TipoPedido(
+            self.base_page, sheet_tipo_pedido, sheet_setor)
         tipo_pedido_page.create()
 
     def run(self):
@@ -101,7 +109,12 @@ class InfraAuto:
             print("6 - Criar Setor Padrão")
             print("7 - Criar Tipo Pedido")
 
-            op = int(input(""))
+            user_input = input(": ")
+            op = 0
+            try:
+                op = int(user_input)
+            except ValueError:
+                print("Invalid input. Please enter a valid integer.")
 
             if op == 1:
                 self.create_entidade()
@@ -109,7 +122,6 @@ class InfraAuto:
                 self.create_setor()
             elif op == 3:
                 self.create_regiao_armazenagem()
-                pass
             elif op == 4:
                 pass
             elif op == 5:
@@ -117,7 +129,7 @@ class InfraAuto:
             elif op == 6:
                 pass
             elif op == 7:
-                pass
+                self.create_tipo_pedido()
 
 infra_auto = InfraAuto()
 infra_auto.start()

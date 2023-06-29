@@ -60,11 +60,12 @@ class DataOr:
 
 
 class TipoPedidoI:
-    def __init__(self, codigo_integracao, descricao, setor):
+    def __init__(self, codigo_integracao, descricao, setor, situacao_lote, estado_material):
         self.codigo_integracao = codigo_integracao
         self.descricao = descricao
         self.setor = setor
-
+        self.situacao_lote = situacao_lote
+        self.estado_material = estado_material
 
 
 class PadraoIntegracaoI:

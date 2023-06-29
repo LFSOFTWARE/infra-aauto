@@ -15,23 +15,25 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
         self.actions = ActionChains(driver)
-        self.time = 120
+        self.time = 200
 
+  
     def findById(self, id, all=False):
         try:
             element = WebDriverWait(self.driver, self.time).until(
-                        EC.presence_of_element_located((By.ID, id))
-                    )
+                EC.presence_of_element_located((By.ID, id))
+            )
             return element
         except Exception as e:
             print("Houve um erro em findById")
-       
+            print(e)
 
     def findByClass(self, className, all=False):
         try:
             if all:
                 elements = WebDriverWait(self.driver, self.time).until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, className))
+                    EC.presence_of_all_elements_located(
+                        (By.CLASS_NAME, className))
                 )
                 return elements
 
@@ -40,11 +42,13 @@ class BasePage:
             )
             return element
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em findByClass")
+            print(e)
+
     def findAndWrite(self, value, id, pressEnter=False, pressTab=False):
         try:
             element = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_element_located((By.ID, id))
+                EC.presence_of_element_located((By.ID, id))
             )
             time.sleep(2)
             try:
@@ -62,27 +66,29 @@ class BasePage:
                 element.send_keys(Keys.TAB)
 
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em findAndWrite")
+            print(e)
 
     def findAndClick(self, id):
-        try:
-            element = WebDriverWait(self.driver, self.time).until(
-                EC.presence_of_element_located((By.ID, id))
-            )
-            element.click()
-        except Exception as e:
-            print("Houve um erro em findById")
+        element = WebDriverWait(self.driver, self.time).until(
+            EC.presence_of_element_located((By.ID, id))
+        )
+        element.click()
+
     def closeAll(self):
         try:
-            elements = self.finAllByCssSelector("a.x-tab-strip-close", all=True)
+            elements = self.finAllByCssSelector(
+                "a.x-tab-strip-close", all=True)
             for element in elements:
-                try: 
+                try:
                     element.click()
                 except Exception as e:
-                    print(f"Ocorreu uma exceção: {type(e).__name__}: {str(e)}")
+                    print(
+                        f"Ocorreu uma exceção: {type(e).__name__}: {str(e)}")
                 time.sleep(2)
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em closeAll")
+            print(e)
 
     def findAndClickByClass(self, id):
         try:
@@ -91,7 +97,8 @@ class BasePage:
             )
             element.click()
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em findAndClickByClass")
+            print(e)
 
     def switchToCotext(self, id):
         try:
@@ -100,13 +107,15 @@ class BasePage:
             )
             self.driver.switch_to.frame(element)
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em switchToCotext")
+            print(e)
 
     def ReturnToMainContext(self):
         try:
             self.driver.switch_to.default_content()
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em ReturnToMainContext")
+            print(e)
 
     def findAndDoubleClick(self, id):
         try:
@@ -115,7 +124,8 @@ class BasePage:
             )
             self.actions.double_click(element).perform()
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em findAndDoubleClick")
+            print(e)
 
     def findAndClickArray(self, ids, isDuble=False):
         try:
@@ -130,14 +140,16 @@ class BasePage:
 
             time.sleep(2)
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em findAndClickArray")
+            print(e)
 
     def inputFormMultiple(self, data):
         try:
             for obj in data:
                 self.findAndWrite(obj['value'], obj['id'])
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em inputFormMultiple")
+            print(e)
 
     def findByXpathAndClick(self, xpath, isDuble=False, element="div"):
         try:
@@ -150,7 +162,8 @@ class BasePage:
             else:
                 element.click()
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em findByXpathAndClick")
+            print(e)
 
     def WriteCNPJ(self, value, id):
         element = WebDriverWait(self.driver, self.time).until(
@@ -176,14 +189,16 @@ class BasePage:
             wait.until(lambda driver: self.attribute_value_is_false(
                 (By.ID, 'DynamicGrid_refresh'), 'aria-disabled'))
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em awaitLoad")
+            print(e)
 
     def closeTab(self, aba):
         try:
             self.ReturnToMainContext()
             self.findAndClick(aba)
         except Exception as e:
-            print("Houve um erro em findById")
+            print("Houve um erro em closeTab")
+            print(e)
 
     def awaitSave(self, selector, class_name=False):
 
@@ -243,27 +258,15 @@ class BasePage:
             EC.presence_of_element_located((By.CSS_SELECTOR, cssSelector))
         )
         return element
-    
-    def teste(self,data):
-        element = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_element_located((By.ID, "filter-SETOR"))
-        ) 
 
-        # Limpar o conteúdo atual do elemento
-        self.driver.execute_script("arguments[0].value = '';", element)
-
-        # Escrever o texto no elemento
-        self.driver.execute_script("arguments[0].value = arguments[1];", element, data)
-
-        # Pressionar a tecla Enter
-        self.driver.execute_script("arguments[0].dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));", element)
-        time.sleep(8)
+    def teste(self, data):
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located((By.ID, "rowNum-0"))
-        )     
-        self.driver.execute_script("arguments[0].click();", element)
-        
+        )
+        self.driver.execute_script("var event = new MouseEvent('dblclick', { 'view': window, 'bubbles': true, 'cancelable': true }); arguments[0].dispatchEvent(event);", element)
+
     def buttonDireito(self):
 
-        elment = self.finAllByCssSelector("td.x-grid3-col.x-grid3-cell.x-grid3-td-SETOR")
+        elment = self.finAllByCssSelector(
+            "td.x-grid3-col.x-grid3-cell.x-grid3-td-SETOR")
         self.actions.context_click(elment).perform()
