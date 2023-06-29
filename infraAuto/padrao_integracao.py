@@ -24,9 +24,9 @@ class PadraoIntegracao:
 
         self.base_page.findAndWrite(
             self.empresa.razao_social.item(), "filter-RAZAOSOCIAL", pressEnter=True)
-        
+
         time.sleep(10)
-        
+
         self.base_page.findAndClick("rowNum-0")
         self.base_page.ReturnToMainContext()
         self.base_page.findAndClickByCss(
@@ -50,7 +50,7 @@ class PadraoIntegracao:
             "PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_tipoAlocacaoPaleteCompleto")
         elements = self.base_page.finAllByCssSelector(
             "div.x-combo-list-item", all=True)
-       
+
         for element in elements:
             if element.text == self.data_padrao.tipo_palete_completo.item():
                 element.click()
@@ -85,25 +85,30 @@ class PadraoIntegracao:
             if element.text == self.data_padrao.tipo_palete_unidade.item():
                 element.click()
                 break
-        
-        
-        if self.data_padrao.ativo.upper() == 'SIM':
-            pass
-        if self.data_padrao.picking_dinamico.upper() == 'SIM':
-            pass
-        if self.data_padrao.aceita_qualquer_barra.upper() == 'SIM':
-            pass
-        if self.data_padrao.percentual_capacidade.upper() == 'SIM':
-            pass
-        if self.data_padrao.coleta_lote_industria.upper() == 'SIM':
-            pass
-        if self.data_padrao.coletar_vencimento_lote.upper() == 'SIM':
-            pass
-      
 
+        if self.data_padrao.ativo.item().upper() == 'SIM':
+            self.base_page.findAndClick(
+                "PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_Ativo")
+            
+        if self.data_padrao.picking_dinamico.item().upper() == 'SIM':
+            self.base_page.findAndClick(
+                "PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_Utiliza Picking Dinâmico")
+            
+        if self.data_padrao.aceita_qualquer_barra.item().upper() == 'SIM':
+            self.base_page.findAndClick(
+                "PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_Aceitar Qualquer Barra do Produto no Remamanejamento Planejado")
+            
+        if self.data_padrao.coleta_lote_industria.item().upper() == 'SIM':
+            self.base_page.findAndClick(
+                "PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_Coleta Lote Indústria")
+            
+        if self.data_padrao.coletar_vencimento_lote.item().upper() == 'SIM':
+            pass
 
         self.base_page.findAndWrite(self.data_padrao.quantidade_maxima_picking.item(),
                                     "PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_qtdeMaxPicking")
-
+        
+        self.base_page.findAndWrite(self.data_padrao.percentual_capacidade.item(),"PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_percCapacidadePickingUnConsideradaReab")
+        
         self.base_page.findAndClick(
             "CadastroWindow_salvarPadrãodeIntegraçãodoDepositante-VTEXBRASIL[9002906]Button")
