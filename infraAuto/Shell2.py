@@ -48,6 +48,9 @@ class InfraAuto:
             sheet_ftp = self.sheet_class.Import('ftp')
             fpt = Ftp(self.base_page, empresa, sheet_ftp)
             fpt.create()
+        
+        time.sleep(3)
+        self.base_page.closeAll()
 
     def create_setor(self):
         sheet_setor = self.sheet_class.Import('setor')
@@ -56,29 +59,44 @@ class InfraAuto:
         #     self.setor = Setor(self.base_page, setor_data)
         #     self.setor.create()
 
-        for setor_data in sheet_setor.itertuples(index=False):
-            self.setor = Setor(self.base_page, setor_data)
-            self.setor.createDepositante()
+        # for setor_data in sheet_setor.itertuples(index=False):
+        #     self.setor = Setor(self.base_page, setor_data)
+        #     self.setor.createDepositante()
+
+        time.sleep(10)
+        
         for setor_data in sheet_setor.itertuples(index=False):
             self.setor = Setor(self.base_page, setor_data)
             tipos_recebimentos = setor_data.tipo_recebimento.split(";")
             self.setor.tipo_recebimento(tipos_recebimentos)
 
+        time.sleep(3)
+        self.base_page.closeAll()
+
     def create_regiao_armazenagem(self):
-        if self.setor is not None:
+        sheet_setor = self.sheet_class.Import('setor')
+        for setor_data in sheet_setor.itertuples(index=False):
+            setor = Setor(self.base_page, setor_data)
             sheet_regiao_armazenagem = self.sheet_class.Import(
                 'regiao_armazenagem')
+            
             for regiao in sheet_regiao_armazenagem.itertuples(index=False):
-                self.setor.regiao_armazenagem(regiao)
+               setor.regiao_armazenagem(regiao)
+            
             print("Create - Regiao Armazenagem")
-        else:
-            print("Nenhum setor foi criado anteriormente.")
+            break
+        time.sleep(3)
+        self.base_page.closeAll()
 
     def cretae_or(self):
         sheet_or = self.sheet_class.Import('or')
         sheet_setor = self.sheet_class.Import('setor')
-        or_page = Or(self.base_page, sheet_setor, sheet_or)
+        sheet_entidade = self.sheet_class.Import('entidade')
+
+        or_page = Or(self.base_page, sheet_setor, sheet_or, sheet_entidade)
         or_page.create()
+        time.sleep(3)
+        self.base_page.closeAll()
 
     def create_padrao_integracao(self):
         sheet_setor = self.sheet_class.Import('setor')
@@ -88,12 +106,17 @@ class InfraAuto:
         padrao_integracao_page = PadraoIntegracao(
             self.base_page, sheet_setor, sheet_padroa_integracao, sheet_entidade)
         padrao_integracao_page.create()
+        time.sleep(3)
+        self.base_page.closeAll()
 
     def create_setor_padrao(self):
         sheet_setor_padrao = self.sheet_class.Import('setor_padrao')
         sheet_empresa = self.sheet_class.Import('entidade')
-        setor_padrao_page = SetorPadrao(self.base_page, sheet_setor_padrao, sheet_empresa)
+        setor_padrao_page = SetorPadrao(
+            self.base_page, sheet_setor_padrao, sheet_empresa)
         setor_padrao_page.create()
+        time.sleep(3)
+        self.base_page.closeAll()
 
     def create_tipo_pedido(self):
         sheet_tipo_pedido = self.sheet_class.Import('tipo_pedido')
@@ -101,6 +124,8 @@ class InfraAuto:
         tipo_pedido_page = TipoPedido(
             self.base_page, sheet_tipo_pedido, sheet_setor)
         tipo_pedido_page.create()
+        time.sleep(3)
+        self.base_page.closeAll()
 
     def run(self):
         while True:
@@ -113,12 +138,15 @@ class InfraAuto:
             print("6 - Criar Setor Padrão")
             print("7 - Criar Tipo Pedido")
 
-            user_input = input(": ")
             op = 0
-            try:
-                op = int(user_input)
-            except ValueError:
-                print("Invalid input. Please enter a valid integer.")
+
+            while True:
+                user_input = input(": ")
+                try:
+                    op = int(user_input)
+                    break
+                except ValueError:
+                    print("Invalid input. Please enter a valid integer.")
 
             if op == 1:
                 self.create_entidade()
@@ -127,7 +155,7 @@ class InfraAuto:
             elif op == 3:
                 self.create_regiao_armazenagem()
             elif op == 4:
-                pass
+                self.cretae_or()
             elif op == 5:
                 self.create_padrao_integracao()
             elif op == 6:
@@ -136,6 +164,8 @@ class InfraAuto:
                 self.create_tipo_pedido()
             elif op == 0:
                 break
+
+
 infra_auto = InfraAuto()
 infra_auto.start()
 infra_auto.run()

@@ -16,7 +16,7 @@ class BasePage:
         self.driver = driver
         self.actions = ActionChains(driver)
         self.time = 200
-
+    
   
     def findById(self, id, all=False):
         try:
@@ -83,13 +83,11 @@ class BasePage:
                 try:
                     element.click()
                 except Exception as e:
-                    print(
-                        f"Ocorreu uma exceção: {type(e).__name__}: {str(e)}")
+                    pass
                 time.sleep(2)
         except Exception as e:
-            print("Houve um erro em closeAll")
-            print(e)
-
+            pass
+        
     def findAndClickByClass(self, id):
         try:
             element = WebDriverWait(self.driver, self.time).until(
@@ -138,7 +136,7 @@ class BasePage:
                 else:
                     element.click()
 
-            time.sleep(2)
+                time.sleep(2)
         except Exception as e:
             print("Houve um erro em findAndClickArray")
             print(e)
@@ -247,23 +245,37 @@ class BasePage:
         element.click()
 
     def finAllByCssSelector(self, cssSelector, all=False):
-        if all:
-            elements = WebDriverWait(self.driver, self.time).until(
-                EC.presence_of_all_elements_located(
-                    (By.CSS_SELECTOR, cssSelector))
+        try:
+            if all:
+                elements = WebDriverWait(self.driver, self.time).until(
+                    EC.presence_of_all_elements_located(
+                        (By.CSS_SELECTOR, cssSelector))
+                )
+
+                return elements
+            element = WebDriverWait(self.driver, self.time).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, cssSelector))
             )
+            return element
+        except Exception as e:
+            pass
 
-            return elements
-        element = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, cssSelector))
-        )
-        return element
+    def teste(self):
+           # Verifica se o elemento está presente na página
+            element_present = EC.presence_of_element_located((By.ID, "rowNum-0"))
+            WebDriverWait(self.driver, 20).until(element_present)
+            
+            # Verifica se o elemento está clicável
+            element_clickable = EC.element_to_be_clickable((By.ID, "rowNum-0"))
+            WebDriverWait(self.driver, 20).until(element_clickable)
+            # Clica no elemento
+            element = self.findById("rowNum-0")
+            print(element)
+            element.click()
 
-    def teste(self, data):
-        element = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_element_located((By.ID, "rowNum-0"))
-        )
-        self.driver.execute_script("var event = new MouseEvent('dblclick', { 'view': window, 'bubbles': true, 'cancelable': true }); arguments[0].dispatchEvent(event);", element)
+            self.driver.refresh()
+    def reaload(self):
+        self.driver.refresh()
 
     def buttonDireito(self):
 

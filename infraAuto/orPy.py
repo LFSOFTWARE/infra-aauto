@@ -14,7 +14,6 @@ class Or:
 
     def create(self):
         time.sleep(2)
-        # self.base_page.closeTab("AbaRegiaodeArmazenagemClose")
         self.base_page.findAndClickArray(
             ["NavigationView_tree-FolderCadastro", "NavigationView_tree-ItemDepositante"], True)
         
@@ -22,9 +21,7 @@ class Or:
         self.base_page.findAndWrite(
             self.data_empresa.razao_social, "filter-RAZAOSOCIAL", pressEnter=True)
         time.sleep(2)
-        print("travou")
         self.base_page.findAndClick("rowNum-0")
-        print("travou2")
         self.base_page.ReturnToMainContext()
         self.base_page.findAndClickByCss(
             "button.x-btn-text[style='position: relative; width: 12px;']")
