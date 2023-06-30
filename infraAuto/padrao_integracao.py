@@ -110,5 +110,11 @@ class PadraoIntegracao:
         
         self.base_page.findAndWrite(self.data_padrao.percentual_capacidade.item(),"PadraoIntegracaoRegraNegocioDepositanteScreenDescriptor_percCapacidadePickingUnConsideradaReab")
         
-        self.base_page.findAndClick(
-            "CadastroWindow_salvarPadrãodeIntegraçãodoDepositante-VTEXBRASIL[9002906]Button")
+        elements = self.base_page.finAllByCssSelector("button.x-btn-text[style='position: relative; width: 69px;']",all=True)
+
+        for element in elements:
+            if element.text == 'Salvar':
+                element.click()
+                break
+        # self.base_page.findAndClick(
+        #     "CadastroWindow_salvarPadrãodeIntegraçãodoDepositante-VTEXBRASIL[9002906]Button")
