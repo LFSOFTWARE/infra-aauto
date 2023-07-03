@@ -131,19 +131,35 @@ class BasePage:
             print("Houve um erro em findAndDoubleClick")
             print(e)
 
-    def findAndClickArray(self, ids, isDuble=False):
+    # def findAndClickArray(self, ids, isDuble=False):
+    #     for id in ids:
+    #         element = WebDriverWait(self.driver, self.time).until(
+    #             EC.presence_of_element_located((By.ID, id))
+    #         )
+    #         if isDuble:
+    #             self.driver.execute_script("arguments[0].scrollIntoView();", element)
+    #             self.actions.double_click(element).perform()
+    #         else:
+    #             self.driver.execute_script("arguments[0].scrollIntoView();", element)
+    #             element.click()
+
+    #         time.sleep(2)
+    def findAndClickArray(self, ids, isDouble=False):
         for id in ids:
             element = WebDriverWait(self.driver, self.time).until(
-                EC.presence_of_element_located((By.ID, id))
+                EC.visibility_of_element_located((By.ID, id))
             )
-            if isDuble:
-                time.sleep(2)
+            WebDriverWait(self.driver, self.time).until(
+                EC.element_to_be_clickable(element)
+            )
+            self.driver.execute_script("arguments[0].scrollIntoView();", element)
+            
+            if isDouble:
                 self.actions.double_click(element).perform()
             else:
-                time.sleep(2)
                 element.click()
 
-            time.sleep(2)
+            time.sleep(2)        
 
     def inputFormMultiple(self, data):
         try:
@@ -221,11 +237,15 @@ class BasePage:
         print("Terminou")
 
     def insert_value_integration(self, value):
+        time.sleep(5)
+
         element = WebDriverWait(self.driver, self.time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, "input.x-form-field.x-form-text[style='width: 268px;']"))
 
         )
+        time.sleep(5)
+
         element.send_keys(value)
 
     def button_value_integration(self):

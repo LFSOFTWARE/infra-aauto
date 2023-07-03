@@ -35,13 +35,16 @@ class InfraAuto:
 
     def create_entidade(self):
         sheet_entidade = self.sheet_class.Import('entidade')
+
         for empresa in sheet_entidade.itertuples(index=False):
             entidade_page = Entidade(self.base_page, empresa)
             entidade_page.create()
 
             depositante_page = Depositante(self.base_page, empresa)
             depositante_page.create()
+
             self.base_page.reaload()
+            
             api_rest = Api(self.base_page, empresa)
             api_rest.create()
 

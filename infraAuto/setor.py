@@ -67,7 +67,7 @@ class Setor:
         self.base_page.findAndClick(
             "CadastroWindow_salvarCadastrodeSetorButton")
 
-        print("Create - Setor")
+        print("Create - Setor - "+ str(self.data.setor_armazenagem))
 
     def createDepositante(self):
         time.sleep(5)
@@ -101,9 +101,9 @@ class Setor:
         self.base_page.button_value_integration()
         time.sleep(3)
         self.base_page.findAndClick("SiltTransfere_fecharButton")
-        print("Create - Depositante")
+        print("Create - Depositante - "+str(self.data.setor_armazenagem))
         self.base_page.reaload()
-        
+
     def tipo_recebimento(self, tipos):
         time.sleep(2)
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
@@ -139,7 +139,7 @@ class Setor:
 
         self.base_page.findAndClick("SiltTransfere_fecharButton")
 
-        print("Create - Tipo Recebimento")
+        print("Create - Tipo Recebimento - "+ str(self.data.setor_armazenagem))
         self.base_page.reaload()
 
 
@@ -161,4 +161,4 @@ class Setor:
                 break
         
         self.base_page.findAndClick("CadastroWindow_salvarCadastrodeRegiãodeArmazenagemButton")
-        print("Create - Regiao Armazenagem")
+        print("Create - Regiao Armazenagem - " + str(self.data.regiao_armazenagem))
