@@ -48,7 +48,7 @@ class InfraAuto:
             sheet_ftp = self.sheet_class.Import('ftp')
             fpt = Ftp(self.base_page, empresa, sheet_ftp)
             fpt.create()
-        
+
         time.sleep(3)
         self.base_page.closeAll()
         self.base_page.reaload()
@@ -62,12 +62,14 @@ class InfraAuto:
 
         time.sleep(30)
 
+    def create_depositante(self):
+        sheet_setor = self.sheet_class.Import('setor')
         for setor_data in sheet_setor.itertuples(index=False):
             self.setor = Setor(self.base_page, setor_data)
             self.setor.createDepositante()
 
         time.sleep(10)
-        
+
         self.base_page.closeAll()
         self.base_page.reaload()
 
@@ -89,10 +91,10 @@ class InfraAuto:
             setor = Setor(self.base_page, setor_data)
             sheet_regiao_armazenagem = self.sheet_class.Import(
                 'regiao_armazenagem')
-            
+
             for regiao in sheet_regiao_armazenagem.itertuples(index=False):
-               setor.regiao_armazenagem(regiao)
-            
+                setor.regiao_armazenagem(regiao)
+
             break
         time.sleep(3)
         self.base_page.closeAll()
@@ -145,13 +147,14 @@ class InfraAuto:
         while True:
             print("Bem Vindo")
             print("1 - Criar Entidade e suas configurações")
-            print("2 - Criar Setor e Depositante")
-            print("3 - Criar Tipo Recebimento")
-            print("4 - Criar Regiao Armazenagem")
-            print("5 - Criar Or")
-            print("6 - Criar Padrão Integração")
-            print("7 - Criar Setor Padrão")
-            print("8 - Criar Tipo Pedido")
+            print("2 - Criar Setor")
+            print("3 - Criar Depositante")
+            print("4 - Criar Tipo Recebimento")
+            print("5 - Criar Regiao Armazenagem")
+            print("6 - Criar Or")
+            print("7 - Criar Padrão Integração")
+            print("8 - Criar Setor Padrão")
+            print("9 - Criar Tipo Pedido")
 
             op = 0
 
@@ -168,16 +171,18 @@ class InfraAuto:
             elif op == 2:
                 self.create_setor()
             elif op == 3:
-                self.create_tipo_recebimento()
+                self.create_depositante()
             elif op == 4:
-                self.create_regiao_armazenagem()
+                self.create_tipo_recebimento()
             elif op == 5:
-                self.create_or()
+                self.create_regiao_armazenagem()
             elif op == 6:
-                self.create_padrao_integracao()
+                self.create_or()
             elif op == 7:
-                self.create_setor_padrao()
+                self.create_padrao_integracao()
             elif op == 8:
+                self.create_setor_padrao()
+            elif op == 9:
                 self.create_tipo_pedido()
             elif op == 0:
                 break
