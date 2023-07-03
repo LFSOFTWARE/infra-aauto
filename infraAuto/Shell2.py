@@ -55,13 +55,13 @@ class InfraAuto:
     def create_setor(self):
         sheet_setor = self.sheet_class.Import('setor')
 
-        # for setor_data in sheet_setor.itertuples(index=False):
-        #     self.setor = Setor(self.base_page, setor_data)
-        #     self.setor.create()
+        for setor_data in sheet_setor.itertuples(index=False):
+            self.setor = Setor(self.base_page, setor_data)
+            self.setor.create()
 
-        # for setor_data in sheet_setor.itertuples(index=False):
-        #     self.setor = Setor(self.base_page, setor_data)
-        #     self.setor.createDepositante()
+        for setor_data in sheet_setor.itertuples(index=False):
+            self.setor = Setor(self.base_page, setor_data)
+            self.setor.createDepositante()
 
         time.sleep(10)
         
@@ -83,7 +83,6 @@ class InfraAuto:
             for regiao in sheet_regiao_armazenagem.itertuples(index=False):
                setor.regiao_armazenagem(regiao)
             
-            print("Create - Regiao Armazenagem")
             break
         time.sleep(3)
         self.base_page.closeAll()

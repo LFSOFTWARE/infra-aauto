@@ -159,3 +159,4 @@ class Setor:
                 break
         
         self.base_page.findAndClick("CadastroWindow_salvarCadastrodeRegiãodeArmazenagemButton")
+        print("Create - Regiao Armazenagem")
