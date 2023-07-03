@@ -69,7 +69,8 @@ class Setor:
 
         print("Create - Setor")
 
-    def createDepositante(self, ):
+    def createDepositante(self):
+        time.sleep(5)
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                             "NavigationView_tree-FolderCadastroArmazem", "NavigationView_tree-ItemSetor"], True)
 
@@ -102,6 +103,7 @@ class Setor:
         self.base_page.findAndClick("SiltTransfere_fecharButton")
         print("Create - Depositante")
         self.base_page.reaload()
+        
     def tipo_recebimento(self, tipos):
         time.sleep(2)
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",

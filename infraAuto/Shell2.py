@@ -41,7 +41,7 @@ class InfraAuto:
 
             depositante_page = Depositante(self.base_page, empresa)
             depositante_page.create()
-
+            self.base_page.reaload()
             api_rest = Api(self.base_page, empresa)
             api_rest.create()
 
@@ -51,6 +51,7 @@ class InfraAuto:
         
         time.sleep(3)
         self.base_page.closeAll()
+        self.base_page.reaload()
 
     def create_setor(self):
         sheet_setor = self.sheet_class.Import('setor')
@@ -59,12 +60,20 @@ class InfraAuto:
             self.setor = Setor(self.base_page, setor_data)
             self.setor.create()
 
+        time.sleep(30)
+
         for setor_data in sheet_setor.itertuples(index=False):
             self.setor = Setor(self.base_page, setor_data)
             self.setor.createDepositante()
 
         time.sleep(10)
         
+        self.base_page.closeAll()
+        self.base_page.reaload()
+
+    def create_tipo_recebimento(self):
+        sheet_setor = self.sheet_class.Import('setor')
+
         for setor_data in sheet_setor.itertuples(index=False):
             self.setor = Setor(self.base_page, setor_data)
             tipos_recebimentos = setor_data.tipo_recebimento.split(";")
@@ -72,6 +81,7 @@ class InfraAuto:
 
         time.sleep(3)
         self.base_page.closeAll()
+        self.base_page.reaload()
 
     def create_regiao_armazenagem(self):
         sheet_setor = self.sheet_class.Import('setor')
@@ -86,8 +96,9 @@ class InfraAuto:
             break
         time.sleep(3)
         self.base_page.closeAll()
+        self.base_page.reaload()
 
-    def cretae_or(self):
+    def create_or(self):
         sheet_or = self.sheet_class.Import('or')
         sheet_setor = self.sheet_class.Import('setor')
         sheet_entidade = self.sheet_class.Import('entidade')
@@ -96,6 +107,7 @@ class InfraAuto:
         or_page.create()
         time.sleep(3)
         self.base_page.closeAll()
+        self.base_page.reaload()
 
     def create_padrao_integracao(self):
         sheet_setor = self.sheet_class.Import('setor')
@@ -107,6 +119,7 @@ class InfraAuto:
         padrao_integracao_page.create()
         time.sleep(3)
         self.base_page.closeAll()
+        self.base_page.reaload()
 
     def create_setor_padrao(self):
         sheet_setor_padrao = self.sheet_class.Import('setor_padrao')
@@ -116,6 +129,7 @@ class InfraAuto:
         setor_padrao_page.create()
         time.sleep(3)
         self.base_page.closeAll()
+        self.base_page.reaload()
 
     def create_tipo_pedido(self):
         sheet_tipo_pedido = self.sheet_class.Import('tipo_pedido')
@@ -125,17 +139,19 @@ class InfraAuto:
         tipo_pedido_page.create()
         time.sleep(3)
         self.base_page.closeAll()
+        self.base_page.reaload()
 
     def run(self):
         while True:
             print("Bem Vindo")
             print("1 - Criar Entidade e suas configurações")
             print("2 - Criar Setor e Depositante")
-            print("3 - Criar Regiao Armazenagem")
-            print("4 - Criar Or")
-            print("5 - Criar Padrão Integração")
-            print("6 - Criar Setor Padrão")
-            print("7 - Criar Tipo Pedido")
+            print("3 - Criar Tipo Recebimento")
+            print("4 - Criar Regiao Armazenagem")
+            print("5 - Criar Or")
+            print("6 - Criar Padrão Integração")
+            print("7 - Criar Setor Padrão")
+            print("8 - Criar Tipo Pedido")
 
             op = 0
 
@@ -152,14 +168,16 @@ class InfraAuto:
             elif op == 2:
                 self.create_setor()
             elif op == 3:
-                self.create_regiao_armazenagem()
+                self.create_tipo_recebimento()
             elif op == 4:
-                self.cretae_or()
+                self.create_regiao_armazenagem()
             elif op == 5:
-                self.create_padrao_integracao()
+                self.create_or()
             elif op == 6:
-                self.create_setor_padrao()
+                self.create_padrao_integracao()
             elif op == 7:
+                self.create_setor_padrao()
+            elif op == 8:
                 self.create_tipo_pedido()
             elif op == 0:
                 break

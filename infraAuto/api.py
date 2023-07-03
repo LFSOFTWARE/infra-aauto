@@ -9,8 +9,6 @@ class Api:
     def create(self):
         time.sleep(2)
 
-        self.base_page.closeTab("AbaDepositanteClose")
-        
         self.base_page.findAndClickArray(["NavigationView_tree-FolderConfiguracao",
                                           "NavigationView_tree-ItemConfiguracaodeIntegracao"], True)
         

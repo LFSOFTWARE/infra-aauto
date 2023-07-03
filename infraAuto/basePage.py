@@ -16,8 +16,7 @@ class BasePage:
         self.driver = driver
         self.actions = ActionChains(driver)
         self.time = 200
-    
-  
+
     def findById(self, id, all=False):
         try:
             element = WebDriverWait(self.driver, self.time).until(
@@ -70,10 +69,17 @@ class BasePage:
             print(e)
 
     def findAndClick(self, id):
-        element = WebDriverWait(self.driver, self.time).until(
-            EC.presence_of_element_located((By.ID, id))
-        )
-        element.click()
+        try:
+            element = WebDriverWait(self.driver, self.time).until(
+                EC.presence_of_element_located((By.ID, id))
+            )
+            element.click()
+
+        except Exception as e:
+            element = WebDriverWait(self.driver, self.time).until(
+                EC.presence_of_element_located((By.ID, id))
+            )
+            element.click()
 
     def closeAll(self):
         try:
@@ -87,7 +93,7 @@ class BasePage:
                 time.sleep(2)
         except Exception as e:
             pass
-        
+
     def findAndClickByClass(self, id):
         try:
             element = WebDriverWait(self.driver, self.time).until(
@@ -126,20 +132,18 @@ class BasePage:
             print(e)
 
     def findAndClickArray(self, ids, isDuble=False):
-        try:
-            for id in ids:
-                element = WebDriverWait(self.driver, self.time).until(
-                    EC.presence_of_element_located((By.ID, id))
-                )
-                if isDuble:
-                    self.actions.double_click(element).perform()
-                else:
-                    element.click()
-
+        for id in ids:
+            element = WebDriverWait(self.driver, self.time).until(
+                EC.presence_of_element_located((By.ID, id))
+            )
+            if isDuble:
                 time.sleep(2)
-        except Exception as e:
-            print("Houve um erro em findAndClickArray")
-            print(e)
+                self.actions.double_click(element).perform()
+            else:
+                time.sleep(2)
+                element.click()
+
+            time.sleep(2)
 
     def inputFormMultiple(self, data):
         try:
@@ -261,19 +265,20 @@ class BasePage:
             pass
 
     def teste(self):
-           # Verifica se o elemento está presente na página
-            element_present = EC.presence_of_element_located((By.ID, "rowNum-0"))
-            WebDriverWait(self.driver, 20).until(element_present)
-            
-            # Verifica se o elemento está clicável
-            element_clickable = EC.element_to_be_clickable((By.ID, "rowNum-0"))
-            WebDriverWait(self.driver, 20).until(element_clickable)
-            # Clica no elemento
-            element = self.findById("rowNum-0")
-            print(element)
-            element.click()
+        # Verifica se o elemento está presente na página
+        element_present = EC.presence_of_element_located((By.ID, "rowNum-0"))
+        WebDriverWait(self.driver, 20).until(element_present)
 
-            self.driver.refresh()
+        # Verifica se o elemento está clicável
+        element_clickable = EC.element_to_be_clickable((By.ID, "rowNum-0"))
+        WebDriverWait(self.driver, 20).until(element_clickable)
+        # Clica no elemento
+        element = self.findById("rowNum-0")
+        print(element)
+        element.click()
+
+        self.driver.refresh()
+
     def reaload(self):
         self.driver.refresh()
 

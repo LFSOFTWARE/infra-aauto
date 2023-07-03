@@ -92,7 +92,7 @@ class Entidade:
                 break
         self.base_page.ReturnToMainContext()
 
-        time.sleep(2)
+        time.sleep(5)
 
         self.base_page.findAndClick("tb-VincularaEntidade-Endereco")
         self.base_page.findAndClick("tb-Cadastrar")
