@@ -37,11 +37,12 @@ class Api:
         elements = self.base_page.findByClass("x-grid3-col-DESCR", all=True)
 
         for elemento in elements:
-            if elemento.text == self.data.armazem:
+            if elemento.text.upper() == self.data.armazem.upper():
                 elemento.click()
                 break
 
         self.base_page.findAndClick("SearchTriggerWindowRemote_selectButton")
+        time.sleep(5)
         self.base_page.findAndClick("CadastroWindow_salvarCadastroConfiguraçãodeIntegraçãoButton")
         print("Create - API REST")
 

@@ -144,7 +144,7 @@ class BasePage:
     #             element.click()
 
     #         time.sleep(2)
-    def findAndClickArray(self, ids, isDouble=False):
+    def findAndClickArray(self, ids, isDuble=False):
         for id in ids:
             element = WebDriverWait(self.driver, self.time).until(
                 EC.visibility_of_element_located((By.ID, id))
@@ -154,7 +154,7 @@ class BasePage:
             )
             self.driver.execute_script("arguments[0].scrollIntoView();", element)
             
-            if isDouble:
+            if isDuble:
                 self.actions.double_click(element).perform()
             else:
                 element.click()
@@ -228,13 +228,11 @@ class BasePage:
                 else:
                     elemento = WebDriverWait(self.driver, 10).until(
                         EC.presence_of_element_located((By.ID, selector)))
-                print("Waiting for")
             except TimeoutException:
                 break
 
             time.sleep(1)
 
-        print("Terminou")
 
     def insert_value_integration(self, value):
         time.sleep(5)

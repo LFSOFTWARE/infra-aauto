@@ -1,13 +1,15 @@
 from basePage import BasePage
 from interfaces import SetorI
+from interfaces import Empresa
 
 import time
 
 
 class Setor:
-    def __init__(self, base_page: BasePage, data: SetorI):
+    def __init__(self, base_page: BasePage, data: SetorI, empresa: Empresa):
         self.base_page = base_page
         self.data = data
+        self.empresa = empresa
 
     def create(self):
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
@@ -90,7 +92,7 @@ class Setor:
         self.base_page.findAndClick("SiltTransfere_buscarComboBox-RAZAOSOCIAL")
 
         self.base_page.findAndWrite(
-            self.data.razao_social, "SiltTransfere_buscarText", pressEnter=True)
+            self.empresa.razao_social, "SiltTransfere_buscarText", pressEnter=True)
         time.sleep(2)
         self.base_page.findAndClickByClass("x-grid-cell-first")
         time.sleep(3)
@@ -161,4 +163,4 @@ class Setor:
                 break
         
         self.base_page.findAndClick("CadastroWindow_salvarCadastrodeRegiãodeArmazenagemButton")
-        print("Create - Regiao Armazenagem - " + str(self.data.regiao_armazenagem))
+        print("Create - Regiao Armazenagem - " + str(self.data.setor_armazenagem))

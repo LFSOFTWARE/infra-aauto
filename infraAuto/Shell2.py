@@ -24,13 +24,17 @@ class InfraAuto:
         self.setor = None
 
     def start(self):
-        url_base = "https://synapcomhml2.seniorcloud.com.br/siltwms/"
+        # https://wms.synapcom.com.br/siltwms/
+        # "https://synapcomhml2.seniorcloud.com.br/siltwms/"
+        url_base = "https://wms.synapcom.com.br/siltwms/"
         driver = webdriver.Chrome()
         driver.get(url_base)
         self.base_page = BasePage(driver)
 
         login_page = Login(self.base_page)
-        login_page.Login("LUIZ.SSANTOS", "Dankicode2002")
+        # "luiz.ssantos"
+        # "LUIZ.SSANTOS"
+        login_page.Login("luiz.ssantos", "Dankicode2002")
         time.sleep(2)
 
     def create_entidade(self):
@@ -44,7 +48,7 @@ class InfraAuto:
             depositante_page.create()
 
             self.base_page.reaload()
-            
+
             api_rest = Api(self.base_page, empresa)
             api_rest.create()
 
@@ -58,17 +62,21 @@ class InfraAuto:
 
     def create_setor(self):
         sheet_setor = self.sheet_class.Import('setor')
+        sheet_entidade = self.sheet_class.Import('entidade')
 
         for setor_data in sheet_setor.itertuples(index=False):
-            self.setor = Setor(self.base_page, setor_data)
+            self.setor = Setor(self.base_page, setor_data, sheet_entidade)
             self.setor.create()
 
         time.sleep(30)
+        self.base_page.reaload()
 
     def create_depositante(self):
         sheet_setor = self.sheet_class.Import('setor')
+        sheet_entidade = self.sheet_class.Import('entidade')
+
         for setor_data in sheet_setor.itertuples(index=False):
-            self.setor = Setor(self.base_page, setor_data)
+            self.setor = Setor(self.base_page, setor_data, sheet_entidade)
             self.setor.createDepositante()
 
         time.sleep(10)
@@ -78,9 +86,10 @@ class InfraAuto:
 
     def create_tipo_recebimento(self):
         sheet_setor = self.sheet_class.Import('setor')
+        sheet_entidade = self.sheet_class.Import('entidade')
 
         for setor_data in sheet_setor.itertuples(index=False):
-            self.setor = Setor(self.base_page, setor_data)
+            self.setor = Setor(self.base_page, setor_data, sheet_entidade)
             tipos_recebimentos = setor_data.tipo_recebimento.split(";")
             self.setor.tipo_recebimento(tipos_recebimentos)
 
@@ -90,8 +99,10 @@ class InfraAuto:
 
     def create_regiao_armazenagem(self):
         sheet_setor = self.sheet_class.Import('setor')
+        sheet_entidade = self.sheet_class.Import('entidade')
+
         for setor_data in sheet_setor.itertuples(index=False):
-            setor = Setor(self.base_page, setor_data)
+            setor = Setor(self.base_page, setor_data, sheet_entidade)
             sheet_regiao_armazenagem = self.sheet_class.Import(
                 'regiao_armazenagem')
 
@@ -111,6 +122,7 @@ class InfraAuto:
         or_page = Or(self.base_page, sheet_setor, sheet_or, sheet_entidade)
         or_page.create()
         time.sleep(3)
+        print("Create - Or")
         self.base_page.closeAll()
         self.base_page.reaload()
 
@@ -123,6 +135,7 @@ class InfraAuto:
             self.base_page, sheet_setor, sheet_padroa_integracao, sheet_entidade)
         padrao_integracao_page.create()
         time.sleep(3)
+        print("Create - Padrão Integração ")
         self.base_page.closeAll()
         self.base_page.reaload()
 
@@ -133,6 +146,7 @@ class InfraAuto:
             self.base_page, sheet_setor_padrao, sheet_empresa)
         setor_padrao_page.create()
         time.sleep(3)
+        print("Create - Setor Padrão")
         self.base_page.closeAll()
         self.base_page.reaload()
 
@@ -143,6 +157,7 @@ class InfraAuto:
             self.base_page, sheet_tipo_pedido, sheet_setor)
         tipo_pedido_page.create()
         time.sleep(3)
+        print("Create - Tipo de Pedido")
         self.base_page.closeAll()
         self.base_page.reaload()
 
