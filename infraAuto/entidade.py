@@ -10,7 +10,7 @@ class Entidade:
         self.data = data
 
     def create(self):
-        # Acessa Entidade
+        # Acessa Entidade 
         self.base_page.findAndClickArray(["NavigationView_tree-FolderCadastro",
                                           "NavigationView_tree-FolderCadastroEntidade",
                                           "NavigationView_tree-ItemEntidade"], True)
