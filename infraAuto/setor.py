@@ -131,13 +131,14 @@ class Setor:
         
         time.sleep(2)
         element = self.base_page.findById("SiltTransfere_buscarText")
-        for tipo in tipos:
-            self.base_page.findAndWrite(
-                tipo, "SiltTransfere_buscarText", pressEnter=True)
-            time.sleep(5)
+        if len(tipos) > 0:
+            for tipo in tipos:
+                self.base_page.findAndWrite(
+                    tipo, "SiltTransfere_buscarText", pressEnter=True)
+                time.sleep(5)
 
-            self.base_page.findAndClick("grid_row_0")
-            element.clear()
+                self.base_page.findAndClick("grid_row_0")
+                element.clear()
 
         self.base_page.findAndClick("SiltTransfere_fecharButton")
 

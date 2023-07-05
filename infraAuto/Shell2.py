@@ -11,7 +11,7 @@ from orPy import Or
 from padrao_integracao import PadraoIntegracao
 from setor_padrao import SetorPadrao
 from tipo_pedido import TipoPedido
-from interfaces import SetorI
+import math
 
 import time
 
@@ -26,7 +26,7 @@ class InfraAuto:
     def start(self):
         # https://wms.synapcom.com.br/siltwms/
         # "https://synapcomhml2.seniorcloud.com.br/siltwms/"
-        url_base = "https://wms.synapcom.com.br/siltwms/"
+        url_base = "https://synapcomhml2.seniorcloud.com.br/siltwms/"
         driver = webdriver.Chrome()
         driver.get(url_base)
         self.base_page = BasePage(driver)
@@ -34,7 +34,7 @@ class InfraAuto:
         login_page = Login(self.base_page)
         # "luiz.ssantos"
         # "LUIZ.SSANTOS"
-        login_page.Login("luiz.ssantos", "Dankicode2002")
+        login_page.Login("LUIZ.SSANTOS", "silt123")
         time.sleep(2)
 
     def create_entidade(self):
@@ -90,8 +90,13 @@ class InfraAuto:
 
         for setor_data in sheet_setor.itertuples(index=False):
             self.setor = Setor(self.base_page, setor_data, sheet_entidade)
-            tipos_recebimentos = setor_data.tipo_recebimento.split(";")
-            self.setor.tipo_recebimento(tipos_recebimentos)
+
+            if isinstance(setor_data.tipo_recebimento, str):
+                tipos_recebimentos = setor_data.tipo_recebimento.split(";")
+                self.setor.tipo_recebimento(tipos_recebimentos)
+            else:
+                self.setor.tipo_recebimento([])
+
 
         time.sleep(3)
         self.base_page.closeAll()
